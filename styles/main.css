@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@theme {
+    /* Breakpoints */
+    --breakpoint-4xl: 1920px;
+    --breakpoint-3xl: 1680px;
+    --breakpoint-2xl: 1440px;
+
+    /* Colors */
+    --color-background: #E8EDF1;
+    --color-light-gray: #D4D9DD;
+    --color-main-blue: #0026E7;
+    --color-main-gray: #8B97A1;
+    /* Fonts */
+    --font-neue-t: 'NeueThin';
+    --font-neue-l: 'NeueLight';
+    --font-neue-r: 'NeueRoman';
+    --font-neue-m: 'NeueMedium';
+    --font-neue-b: 'NeueBold';
+
+    /* Font Size */
+    --text-main-heading: 32px;
+
+    /* Paddings */
+
+    /* Rounded */
+    --rounded-buttons: 10px;
+}
+
+
+@layer base {
+  img {
+    -webkit-user-drag: none; /* Вимикає drag у Safari/Chrome */
+  }
+}
+
+
+@layer utilities {
+    .responsive-padding {
+         @apply px-4 md:px-6 lg:px-8 xl:px-14;
+    }
+    .responsive-text {
+        @apply xl:text-[48px] lg:text-4xl md:text-3xl text-2xl;
+    }
+}
+  
+
+
+/* CART Loading Spinner */
+.loading {
+  position: relative;
+  color: transparent !important;
+}
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.2em;
+  height: 1.2em;
+  margin: -0.6em 0 0 -0.6em;
+  border: 2px solid white;
+  border-top: 2px solid #2f70f2;
+  border-radius: 50%;
+  animation: spin 0.5s linear infinite;
+  z-index: 2;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Global */
+body {
+  overflow-x: hidden;
+}
+/* Pagination */
+.swiper-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 1px solid white; 
+    transition: background-color 0.3s, width 0.3s;
+}
+.swiper-pagination-2 .swiper-pagination-bullet {
+  border: 1px solid #8B97A1; 
+  width: 8px;
+  height: 8px;
+}
+.swiper-pagination-bullet-active {
+    width: 8px;
+    height: 8px;
+    background-color: #0026E7;
+    border: none;
+    border-radius: 10px;
+}
+
+
+/* Animations */
+@keyframes slow-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinning {
+  animation: slow-spin 10s linear infinite;
+}
+.feature-item {
+  transition: all 0.5s ease-in-out, color 0.5s ease-in-out;
+  position: relative;
+  top: 0;
+  color: black;
+}
+
+.feature-item.active {
+  top: -150px;
+  background-color: #0026E7;
+  color: white;
+}
+
+.feature-item.active p {
+  color: white;
+}
+
+/* Chrome, Safari, Edge */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+circle:hover {
+  cursor: pointer !important;
+}

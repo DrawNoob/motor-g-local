@@ -1,0 +1,215 @@
+<header class="responsive-padding bg-background">
+  <div class="max-w-[1440px] mx-auto flex justify-between items-center py-5 md:min-h-[85px]">
+    <!-- LOGO -->
+    <a href="/" class="logo">
+      <img src="{{ section.settings.header-logo | image_url }}" alt="MOTOR-G Logo" class="max-w-[97px]">
+    </a>
+    <!-- Navigation -->
+    <div class="flex xl:gap-10 md:gap-3 items-center">
+      <nav class="md:flex gap-10 hidden">
+        {% for link in linklists[section.settings['header-menu']].links %}
+          <a
+            href="{{ link.url }}"
+            class="
+              font-neue-l hover:text-main-blue duration-200 transition-all hover:border-b-[1px]
+              {% if link.url == request.path %} text-main-blue border-b-[1px] {% endif %}
+            "
+          >
+            {{ link.title }}
+          </a>
+        {% endfor %}
+      </nav>
+      <!-- Language Selector -->
+      <div class="flex flex-col relative">
+        <div class="relative z-30 language-selector">
+          <button class="cursor-pointer hover:shadow lang-btn flex gap-1 items-center bg-white py-2 px-4">
+            <img class="w-6 h-6" src="{{ request.locale.iso_code | append: '.webp' | asset_url }}" alt="{{ request.locale.iso_code | upcase }} Flag">
+            <span class="uppercase text-sm font-medium">{{ request.locale.iso_code }}</span>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+
+          <div class="lang-menu absolute md:-left-10 mt-2 bg-white border border-main-gray rounded-lg shadow w-40 hidden">
+            <ul class="py-2">
+              {% for locale in shop.published_locales %}
+                {% assign lang_root_pathes = shop.published_locales | map: 'root_url' %}
+                {% if locale.primary %}
+                  {% assign url_path = locale.root_url | append: request.path %}
+                  {% for lang in lang_root_pathes %}
+                    {% capture url_path %}{{ url_path | replace: lang, '/' | replace: '//', '/' }}{% endcapture %}
+                  {% endfor %}
+                {% else %}
+                  {% assign url_path = locale.root_url | append: request.path | replace: '//', '/' %}
+                {% endif %}
+
+                <li>
+                  <a href="{{ url_path }}" class="flex items-center px-4 py-2 hover:bg-gray-100 {% if locale.iso_code == request.locale.iso_code %}bg-gray-100{% endif %}">
+                    <img src="{{ locale.iso_code | append: '.webp' | asset_url }}" alt="{{ locale.iso_code | upcase }}" class="w-5 h-5 mr-2">
+                    <span class="capitalize">{{ locale.name }}</span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        <!-- Cart Icon -->
+        {% if cart.item_count > 0 %}
+          <div class="absolute md:top-16 top-0 md:right-5 -right-12 md:w-16 w-10 md:h-16 h-10 z-20 hover:scale-105 transition-all duration-200 hover:shadow-2xl rounded-full {% if template == 'cart' %}hidden{% endif %}">
+            <a href="{{ routes.cart_url }}" class="md:w-16 w-10 md:h-16 h-10 relative">
+              <img src="{{ 'cart.svg' | asset_url }}" alt="Cart Icon" class="md:w-16 w-10 md:h-16 h-10">
+              <span class="absolute right-2.5 top-8 text-main-blue bg-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {{ cart.item_count }}
+              </span>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <button id="burgerBtn" class="md:hidden flex flex-col justify-center gap-2 ml-4 z-40">
+      <span class="w-10 h-[3px] bg-black transition-all duration-300"></span>
+      <span class="w-10 h-[3px] bg-black transition-all duration-300"></span>
+    </button>
+    <!-- Mobile Menu Sidebar -->
+    <div id="mobileMenu" class="fixed top-0 right-[-100%] w-full h-full bg-[#0026E7] text-white transition-all duration-300 z-40 flex flex-col justify-start p-6 gap-6">
+      <div class="flex justify-between items-center">
+        <img src="{{ 'white-motor-g-logo.webp' | asset_url }}" alt="MOTOR-G Logo" class="max-w-[97px]">
+        <div class="flex gap-5">
+          <div class="flex flex-row gap-3 relative">
+            {% render 'language-selector' %}
+            <!-- Cart Icon -->
+            {% if cart.item_count > 0 %}
+              <div class=" md:top-16 top-0 md:right-5 -right-12 md:w-16 w-10 md:h-16 h-10 z-40 hover:scale-105 transition-all duration-200 hover:shadow-2xl rounded-full {% if template == 'cart' %}hidden{% endif %}">
+                <a href="{{ routes.cart_url }}" class="md:w-16 w-10 md:h-16 h-10 relative">
+                  <img src="{{ 'cart.svg' | asset_url }}" alt="Cart Icon" class="md:w-16 w-10 md:h-16 h-10">
+                  <span class="absolute right-2.5 top-8 text-main-blue bg-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                    {{ cart.item_count }}
+                  </span>
+                </a>
+              </div>
+            {% endif %}
+          </div>
+          <button id="closeBtn" class="text-2xl font-bold text-white"><img src="{{ 'cross-close-icon.svg' | asset_url }}" alt="Close" width="20px" height="20px"></button>
+        </div>
+      </div>
+      <nav class="flex flex-col gap-4 font-neue-m text-2xl mt-10">
+        {% for link in linklists[section.settings['header-menu']].links %}
+          <a href="{{ link.url }}" class="flex justify-between border-b-2 border-white pb-2">
+            {{- link.title }}
+            <span>{{ 'mobile-header-arrow.svg' | inline_asset_content }}</span></a
+          >
+        {% endfor %}
+      </nav>
+      <div class="pt-4 text-sm">
+        <p class="mb-3">{{ 'templates.contact.form.email' | t }}</p>
+        <a href="mailto:{{ section.settings.email }}" class="text-2xl font-neue-m flex items-center gap-2">
+          {{- section.settings.email }}
+          {{ 'mobile-header-arrow.svg' | inline_asset_content -}}
+        </a>
+        <hr class="my-3 border-b-2 border-white">
+        <p class="mb-3">{{ 'templates.contact.form.phone' | t }}</p>
+        <a href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-'  }}" class="text-2xl font-neue-m flex items-center gap-2">
+          {{- section.settings.phone }}
+          {{ 'mobile-header-arrow.svg' | inline_asset_content -}}
+        </a>
+        <hr class="my-3 border-b-2 border-white">
+        <p class="mb-3">{{ section.settings.messenger_title }}</p>
+        <div class="flex gap-3 text-xl font-neue-m">
+          {% if section.settings.signal_link %}
+            <a href="{{ section.settings.signal_link }}" class="underline flex items-center gap-2">
+              Signal
+              {{ 'mobile-header-arrow.svg' | inline_asset_content -}}
+            </a>
+          {% endif %}
+          {% if section.settings.viber_link %}
+            <a href="{{ section.settings.viber_link }}" class="underline flex items-center gap-2">
+              Viber
+              {{ 'mobile-header-arrow.svg' | inline_asset_content -}}
+            </a>
+          {% endif %}
+          {% if section.settings.whatsapp_link %}
+            <a href="{{ section.settings.whatsapp_link }}" class="underline flex items-center gap-2">
+              Whatsapp
+              {{ 'mobile-header-arrow.svg' | inline_asset_content -}}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "header-menu",
+      "label": "Chose Menu"
+    },
+    {
+      "type": "header",
+      "content": "Logotype"
+    },
+    {
+      "type": "image_picker",
+      "id": "header-logo",
+      "label": "Choose Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo-width",
+      "label": "Logo Width",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "default": 200
+    },
+    {
+      "type": "header",
+      "content": "Contact Information"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "info@motor-g.com"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone Number",
+      "default": "+38 (063) 941-31-10"
+    },
+    {
+      "type": "text",
+      "id": "messenger_title",
+      "label": "Messenger Section Title",
+      "default": "Месенджер"
+    },
+    {
+      "type": "url",
+      "id": "signal_link",
+      "label": "Signal Link"
+    },
+    {
+      "type": "url",
+      "id": "viber_link",
+      "label": "Viber Link"
+    },
+    {
+      "type": "url",
+      "id": "whatsapp_link",
+      "label": "WhatsApp Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
+}
+{% endschema %}

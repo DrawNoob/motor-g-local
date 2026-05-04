@@ -1,0 +1,200 @@
+<style>
+  .bg-button{
+      background-color: {{ block.settings.btn_color }};
+  }
+</style>
+
+<div class="mx-auto pt-{{ block.settings.padding_top }} pb-{{ block.settings.padding_bottom }} px-{{ block.settings.padding_x }}">
+  <div
+    class="
+      swiper-{{ block.id }} flex items-center overflow-hidden
+      {% if block.settings.slider-btn-position == false %} w-[90%] mx-auto {% endif %}
+    "
+  >
+    <div class="swiper-wrapper flex">
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+
+  <div
+    class="
+      swiper-buttons w-full
+      {% if block.settings.buttons %} flex {% else %} hidden {% endif %}
+
+      {% if block.settings.slider-btn-position %}
+        justify-center gap-5 mt-10
+      {%  else %}
+        justify-between relative -top-[220px] z-[99999]
+      {% endif %}
+    "
+  >
+    <div
+      class="
+        swiper-button-prev-{{ block.id }} w-[40px] h-[40px] flex justify-center items-center bg-button cursor-pointer
+        {% if block.settings.rounded %}rounded-full{% endif %}
+        {% if block.settings.huge %}w-[60px] h-[60px]{% endif %}
+      "
+    >
+      <svg class="rotate-180" width="16" height="13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="m8.6 1.95 3.6 3.6H0v2h12.2l-3.6 3.5 1.5 1.4 5.9-5.9-5.9-6-1.5 1.4z" fill="currentColor"></path>
+      </svg>
+    </div>
+    <div
+      class="
+        swiper-button-next-{{ block.id }} w-[40px] h-[40px] flex justify-center items-center bg-button cursor-pointer
+        {% if block.settings.rounded %}rounded-full{% endif %}
+        {% if block.settings.huge %}w-[60px] h-[60px]{% endif %}
+      "
+    >
+      <svg width="16" height="13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="m8.6 1.95 3.6 3.6H0v2h12.2l-3.6 3.5 1.5 1.4 5.9-5.9-5.9-6-1.5 1.4z" fill="currentColor"></path>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function initSwiper() {
+      const el = document.querySelector('.swiper-{{ block.id }}');
+      if (!el) return;
+
+      if (el.swiper) el.swiper.destroy(true, true);
+
+      new Swiper(el, {
+        direction: 'horizontal',
+        loop: false,
+        centeredSlides: false,
+        speed: 1000,
+        slidesPerView: 4,
+        spaceBetween: 30,
+        navigation: {
+          nextEl: '.swiper-button-next-{{ block.id }}',
+          prevEl: '.swiper-button-prev-{{ block.id }}',
+        },
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          520: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          1280: {
+            slidesPerView: {{ block.settings.slides_per_view }},
+          },
+        },
+      });
+    }
+
+    initSwiper();
+
+    document.addEventListener('shopify:section:load', function (e) {
+      if (e.target.querySelector('.swiper-{{ block.id }}')) {
+        initSwiper();
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Slider Container",
+  "blocks": [{ "type": "slide-for-slider" }],
+  "settings": [
+    {
+      "type": "select",
+      "id": "slides_per_view",
+      "label": "Slides Per View (Desktop)",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "color",
+      "id": "btn_color",
+      "label": "Buttons Color"
+    },
+    {
+      "type": "checkbox",
+      "id": "buttons",
+      "label": "Buttons Visible",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "slider-btn-position",
+      "label": "Buttons Position",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "label": "Buttons Rounded",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "huge",
+      "label": "Huge Buttons",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Paddings"
+    },
+    {
+      "type": "select",
+      "id": "padding_top",
+      "label": "Top padding",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "4", "label": "Small" },
+        { "value": "8", "label": "Medium" },
+        { "value": "12", "label": "Large" },
+        { "value": "16", "label": "Extra Large" }
+      ],
+      "default": "0"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "4", "label": "Small" },
+        { "value": "8", "label": "Medium" },
+        { "value": "12", "label": "Large" },
+        { "value": "16", "label": "Extra Large" }
+      ],
+      "default": "0"
+    },
+    {
+      "type": "select",
+      "id": "padding_x",
+      "label": "Left/Right padding",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "4", "label": "Small" },
+        { "value": "8", "label": "Medium" },
+        { "value": "12", "label": "Large" },
+        { "value": "16", "label": "Extra Large" }
+      ],
+      "default": "0"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slider"
+    }
+  ]
+}
+{% endschema %}

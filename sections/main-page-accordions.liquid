@@ -1,0 +1,105 @@
+<!-- Accordions Section -->
+<section class="flex md:flex-row flex-col-reverse md:px-0 px-4 md:pt-0 pt-[50px] max-w-[1440px] mx-auto items-center">
+  <div class="flex flex-col md:w-1/2 w-full xl:py-[110px] lg:py-[80px] md:py-[60px] py-[30px] xl:px-[50px] lg:px-[35px] md:px-[20px] px-0 md:bg-white">
+    <h3 class="xl:text-[55px] lg:text-[40px] text-3xl font-neue-m xl:pb-[50px] md:pb-[32px] pb-[20px]">{{ section.settings.section_title }}</h3>
+    <!-- Accordions -->
+    <div class="accordion">
+      {% for block in section.blocks %}
+        <div class="cursor-pointer flex flex-col border-b-[1px] border-t-[1px] border-light-gray hover:border-black duration-200">
+          <button class="accordion-header flex justify-between items-center font-medium focus:outline-none cursor-pointer 2xl:py-[25px] py-[20px]">
+            <span class="xl:text-xl xl:max-w-[75%] max-w-[85%] text-start">{{ block.settings.title }}</span>
+            <span class="icon text-[#0026E7] text-4xl transition-transform duration-300 leading-0 md:pb-2">+</span>
+          </button>
+          <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out 3xl:text-base text-sm text-gray-700">
+            <p class="py-2">
+              {{ block.settings.description }}
+            </p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="md:p-[60px] md:w-5/12 w-full mx-auto">
+    {{ section.settings.video | video_tag: controls: false, autoplay: true, muted: true, loop: true, playsinline: true, class: 'w-full mx-auto' }}
+  </div>
+</section>
+
+<!-- Accordion -->
+<script>
+  document.querySelectorAll('.accordion-header').forEach((header) => {
+    header.addEventListener('click', () => {
+      const content = header.nextElementSibling;
+      const icon = header.querySelector('.icon');
+      const isOpen = content.style.maxHeight;
+
+      document.querySelectorAll('.accordion-content').forEach((c) => (c.style.maxHeight = null));
+      document.querySelectorAll('.icon').forEach((i) => (i.textContent = '+'));
+
+      if (!isOpen || content.style.maxHeight === '0px') {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        icon.textContent = '-';
+      } else {
+        content.style.maxHeight = null;
+        icon.textContent = '+';
+      }
+    });
+  });
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {% for block in section.blocks %}
+        {
+        "@type": "Question",
+        "name": "{{ block.settings.title | escape }}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{ block.settings.description | escape }}"
+          }
+        }{% if forloop.last == false %},{% endif %}
+      {% endfor %}
+    ]
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Our Motors Section",
+  "blocks": [
+    {
+      "name": "(Main Page) Accordion",
+      "type": "accordion-item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Accordion Title",
+          "default": "Accordion Title"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Chose Metafield",
+          "default": "Lorem ipsum dolor sit amet consectetur."
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Маєш запитання?"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Відео"
+    }
+  ]
+}
+{% endschema %}

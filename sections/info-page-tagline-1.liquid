@@ -1,0 +1,125 @@
+<!-- Section Tagline -->
+<section class="flex lg:flex-row flex-col bg-background responsive-padding md:pb-[100px] pb-[50px]">
+  <div class="lg:w-1/2 w-full flex flex-col justify-center lg:pr-[80px] md:pr-10">
+    <p class="font-neue-b text-base pb-4 reveal-left">{{ section.settings.tagline }}</p>
+    <h2 class="responsive-text font-neue-m pb-6 reveal-left">{{ section.settings.heading }}</h2>
+    <p class="font-neue-r xl:text-[18px] md:text-sm text-base pb-8 reveal-up">{{ section.settings.description }}</p>
+
+    <div class="flex md:flex-row flex-col pb-8 xl:gap-0 md:gap-4 gap-5">
+      {% for block in section.blocks %}
+        <div class="flex items-start gap-4 reveal-zoom" {{ block.shopify_attributes }}>
+          {% if block.settings.icon %}
+            <img src="{{ block.settings.icon | image_url }}" alt="icon" class="mt-1 w-8 xl:block lg:hidden block">
+          {% else %}
+            <img src="{{ 'cube.webp' | asset_url }}" alt="icon" class="mt-1 w-8 xl:block lg:hidden block">
+          {% endif %}
+          <div class="flex flex-col gap-4">
+            <h3 class="font-neue-b xl:text-xl md:text-sm text-base">{{ block.settings.title }}</h3>
+            <p class="xl:text-base md:text-sm text-base">{{ block.settings.text | newline_to_br }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <button
+      class="support-modal-btn cursor-pointer group flex items-center justify-between xl:w-[300px] lg:w-[250px] md:w-[200px] w-full text-main-blue lg:border-b-4 border-b-2 xl:py-5 py-4 px-0 hover:px-4 hover:bg-main-blue hover:text-white duration-200 transition-all"
+      href="{{ section.settings.button_link }}"
+    >
+      <p class="font-neue-b text-xl reveal-right">{{ section.settings.button_label }}</p>
+      <img class="w-5 h-5 group-hover:hidden block reveal-zoom" src="{{ 'arrow-right.svg' | asset_url }}" alt="Arrow">
+      <img class="w-5 h-5 hidden group-hover:block reveal-zoom" src="{{ 'arrow-right-white.svg' | asset_url }}" alt="Arrow Hover">
+    </button>
+  </div>
+  <div class="lg:w-1/2 w-full lg:mt-0 mt-10">
+    {% if section.settings.image %}
+      <img class="reveal-up w-full object-cover lg:h-[640px] md:h-[350px] h-auto" src="{{ section.settings.image | image_url }}" alt="Tagline">
+    {% else %}
+      <img class="reveal-up w-full object-cover lg:h-[640px] md:h-[350px] h-auto" src="{{ 'footer.webp' | asset_url }}" alt="Tagline">
+    {% endif %}
+  </div>
+  <!-- Modal -->
+  {% render 'contact-popup-modal' %}
+</section>
+
+{% schema %}
+{
+  "name": "Section Tagline",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline (малий заголовок)",
+      "default": "Tagline"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Основний заголовок",
+      "default": "Medium length section heading goes here"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Опис секції",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Зображення праворуч (footer.webp)"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Текст кнопки",
+      "default": "Написати нам"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Посилання кнопки"
+    },
+    {
+      "type": "header",
+      "content": "Form Data"
+    },
+    {
+      "type": "text",
+      "id": "modal_title",
+      "label": "Заголовок модального вікна",
+      "default": "Задайте питання"
+    },
+    {
+      "type": "url",
+      "id": "highlevel_embed_url",
+      "label": "Highlevel Embed URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tagline_item",
+      "name": "Пункт секції",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Іконка (fallback: cube.webp)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Заголовок",
+          "default": "Subheading one"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Опис",
+          "default": "Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nSuspendisse varius enim in eros."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 2
+}
+{% endschema %}

@@ -1,0 +1,39 @@
+{% comment %} TODO: Delete this accordion-item if not used {% endcomment %}
+<!-- Item -->
+<div class="cursor-pointer flex flex-col border-b-[1px] border-t-[1px] border-light-gray hover:border-black duration-200">
+  <button class="accordion-header flex justify-between items-center font-medium focus:outline-none cursor-pointer 2xl:py-[25px] py-[20px]">
+    <span class="xl:text-xl xl:max-w-[75%] max-w-[85%] text-start">{{ block.settings.title }}</span>
+    <span class="icon text-[#0026E7] text-4xl transition-transform duration-300 leading-0 md:pb-2">+</span>
+  </button>
+  <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out 3xl:text-base text-sm text-gray-700">
+    <p class="py-2">
+      {{ block.settings.description }}
+    </p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "(Main Page) Accordion",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Accordion Title",
+      "default": "Accordion Title"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Chose Metafield",
+      "default": "Lorem ipsum dolor sit amet consectetur."
+    }
+  ],
+  "presets": [
+    {
+      "name": "(Main Page) Accordion"
+    }
+  ]
+}
+{% endschema %}

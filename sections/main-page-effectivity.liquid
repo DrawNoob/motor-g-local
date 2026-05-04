@@ -1,0 +1,211 @@
+<style>
+  .swiper-pagination-{{ section.id }} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+</style>
+
+<section class="responsive-padding bg-background md:py-[70px] py-[50px]">
+  <div class=" max-w-[1440px] mx-auto flex flex-col">
+    <div class="flex sm:flex-row flex-col-reverse justify-between w-full sm:gap-0 gap-5 pb-[50px]">
+      <h2 class="xl:text-[55px] lg:text-[40px] text-3xl font-neue-m">
+        {{ section.settings.main_heading | newline_to_br }}
+      </h2>
+      <a href="/" class="logo">
+        <img src="{{ section.settings.header_logo | image_url }}" alt="MOTOR-G Logo" class="md:w-[97px] w-[67px]">
+      </a>
+    </div>
+
+    <!-- Desktop Block -->
+    <div class="md:flex hidden relative justify-center">
+      <img class="w-full min-h-[450px] object-cover" src="{{ 'propeler.webp' | asset_url }}" alt="Big Image">
+      <div class="flex absolute bottom-8 justify-center gap-[1%]" id="feature-blocks">
+        <div class="feature-item bg-white relative xl:px-5 px-3 xl:py-10 py-5 flex flex-col gap-3 w-[23%]">
+          <img class="icon w-[30px] h-[30px]" src="{{ 'gear-1-b.webp' | asset_url }}" alt="Icon">
+          <p class="font-neue-m xl:text-base text-sm">{{ section.settings.feature_text_1 }}</p>
+        </div>
+        <div class="feature-item bg-white relative xl:px-5 px-3 xl:py-10 py-5 flex flex-col gap-3 w-[23%]">
+          <img class="icon w-[30px] h-[30px]" src="{{ 'gear-2-b.webp' | asset_url }}" alt="Icon">
+          <p class="font-neue-m xl:text-base text-sm">{{ section.settings.feature_text_2 }}</p>
+        </div>
+        <div class="feature-item bg-white relative xl:px-5 px-3 xl:py-10 py-5 flex flex-col gap-3 w-[23%]">
+          <img class="icon w-[30px] h-[30px]" src="{{ 'gear-3-b.webp' | asset_url }}" alt="Icon">
+          <p class="font-neue-m xl:text-base text-sm">{{ section.settings.feature_text_3 }}</p>
+        </div>
+        <div class="feature-item bg-white relative xl:px-5 px-3 xl:py-10 py-5 flex flex-col gap-3 w-[23%]">
+          <img class="icon w-[30px] h-[30px]" src="{{ 'gear-4-b.webp' | asset_url }}" alt="Icon">
+          <p class="font-neue-m xl:text-base text-sm">{{ section.settings.feature_text_4 }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Block (Swiper) -->
+    <div class="md:hidden relative">
+      <img class="w-full" src="{{ 'propeler-mob.webp' | asset_url }}" alt="Big Image">
+      <div class="absolute bottom-10 w-[88%] left-[6%] overflow-x-hidden">
+        <div class="swiper-{{ section.id }} flex items-center">
+          <div class="swiper-wrapper flex">
+            <div class="swiper-slide bg-main-blue px-5 py-10 flex flex-col gap-3">
+              <img class="w-[30px] h-[30px]" src="{{ 'gear-1-w.webp' | asset_url }}" alt="Icon">
+              <p class="font-neue-m xl:text-base text-sm text-white">{{ section.settings.feature_text_1 }}</p>
+            </div>
+            <div class="swiper-slide bg-white px-5 py-10 flex flex-col gap-3">
+              <img class="w-[30px] h-[30px]" src="{{ 'gear-2-b.webp' | asset_url }}" alt="Icon">
+              <p class="font-neue-m xl:text-base text-sm">{{ section.settings.feature_text_2 }}</p>
+            </div>
+            <div class="swiper-slide bg-white px-5 py-10 flex flex-col gap-3">
+              <img class="w-[30px] h-[30px]" src="{{ 'gear-3-b.webp' | asset_url }}" alt="Icon">
+              <p class="font-neue-m xl:text-base text-sm">{{ section.settings.feature_text_3 }}</p>
+            </div>
+            <div class="swiper-slide bg-white px-5 py-10 flex flex-col gap-3">
+              <img class="w-[30px] h-[30px]" src="{{ 'gear-4-b.webp' | asset_url }}" alt="Icon">
+              <p class="font-neue-m xl:text-base text-sm">{{ section.settings.feature_text_4 }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-between items-center w-full pt-5">
+          <div class="text-white flex gap-2 items-center">
+            <div class="swiper-button-prev-{{ section.id }} !static !top-auto !left-auto w-8 h-8 flex items-center justify-center border border-white text-white hover:bg-main-blue">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </div>
+            <div class="swiper-button-next-{{ section.id }} !static !top-auto !left-auto w-8 h-8 flex items-center justify-center border border-white text-white hover:bg-main-blue">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+          <div class="swiper-pagination-{{ section.id }} w-max h-[20px]"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Blue Blocks Animated ---------------------------------------------------------------------------------------------------------
+  document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.feature-item');
+    let index = 0;
+
+    function animateItem() {
+      // reset all before next one
+      items.forEach((item) => {
+        item.classList.remove('active');
+        const img = item.querySelector('.icon');
+        if (img) {
+          img.src = img.src.replace('-w.webp', '-b.webp'); // back to dark icon
+        }
+      });
+
+      // activate current
+      const current = items[index];
+      current.classList.add('active');
+      const currentImg = current.querySelector('.icon');
+      if (currentImg) {
+        currentImg.src = currentImg.src.replace('-b.webp', '-w.webp'); // switch to white icon
+      }
+
+      // after 2s – reset and go next
+      setTimeout(() => {
+        current.classList.remove('active');
+        if (currentImg) {
+          currentImg.src = currentImg.src.replace('-w.webp', '-b.webp');
+        }
+        index = (index + 1) % items.length;
+        setTimeout(animateItem, 1000); // short pause before next one
+      }, 5000);
+    }
+
+    animateItem(); // let’s go
+  });
+  // ------------------------------------------------------------------------------------------------------------------------------
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function init() {
+      const el = document.querySelector('.swiper-{{ section.id }}');
+      if (!el) return;
+
+      if (el.swiper) el.swiper.destroy(true, true);
+
+      new Swiper(el, {
+        direction: 'horizontal',
+        loop: false,
+        centeredSlides: true,
+        speed: 1000,
+        slidesPerView: 1,
+        spaceBetween: 20,
+        pagination: {
+          el: '.swiper-pagination-{{ section.id }}',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next-{{ section.id }}',
+          prevEl: '.swiper-button-prev-{{ section.id }}',
+        },
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+        },
+      });
+    }
+
+    init();
+
+    document.addEventListener('shopify:section:load', function (e) {
+      if (e.target.querySelector('.swiper-{{ section.id }}')) {
+        init();
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Efficiency Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "header_logo",
+      "label": "Логотип зверху"
+    },
+    {
+      "type": "textarea",
+      "id": "main_heading",
+      "label": "Основний заголовок",
+      "default": "Еффективність у <br> кожній деталі"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_text_1",
+      "label": "Перевага 1",
+      "default": "Електромагнітні характеристики оптимізовані власним R&D відділом для досягнення найбільшої ефективності при польоті (грам/Ватт)"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_text_2",
+      "label": "Перевага 2",
+      "default": "Кожен мотор проходить ряд електричних тестів перед відвантаженням, що значно зменшує ризик браку"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_text_3",
+      "label": "Перевага 3",
+      "default": "Всі мотори балансуються з точністю до 0,005 г на спеціалізованому обладнанні"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_text_4",
+      "label": "Перевага 4",
+      "default": "Всі елементи підібрані із розрахунку на мілітарне використання в безпілотних системах"
+    }
+  ]
+}
+{% endschema %}

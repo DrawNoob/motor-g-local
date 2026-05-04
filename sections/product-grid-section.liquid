@@ -1,0 +1,105 @@
+<!-- Welcome Section -->
+<section class="responsive-padding bg-background md:pb-16 pb-10">
+  <img class="object-cover max-w-[1440px] mx-auto w-full md:h-[285px] h-[180px]" src="{{ 'catalog.webp' | asset_url }}" alt="Catalog BG">
+</section>
+<section class="responsive-padding bg-background lg:pb-[100px] pb-[50px]">
+  <div class="max-w-[1440px] mx-auto flex flex-col">
+    <h4 class="lg:text-[55px] text-3xl font-neue-m pb-7">{{ section.settings.title }}</h4>
+
+    <!-- Shopify Product Type Filter -->
+    <div class="flex w-full items-center justify-between">
+      {% if collection.filters != empty %}
+        <form id="CollectionFiltersForm" data-section-id="{{ section.id }}" method="get" class="flex flex-wrap gap-5 w-max mb-5">
+          {% for filter in collection.filters %}
+            {% if filter.type == 'list' %}
+              <div class="relative md:w-[200px] w-full h-[60px] flex items-center justify-center">
+                <select
+                  name="{{ filter.param_name }}"
+                  class="z-10 appearance-none rounded-full w-full h-[60px] border-2 pl-4 pr-8 cursor-pointer text-sm"
+                >
+                  <option value="">{{ filter.label }}</option>
+                  {% for value in filter.values %}
+                    <option
+                      value="{{ value.value }}"
+                      {% if value.active %}
+                        selected
+                      {% endif %}
+                    >
+                      {{ value.label }} ({{ value.count }})
+                    </option>
+                  {% endfor %}
+                </select>
+                <img class="absolute z-0 right-5 w-3 h-3" src="{{ 'arr.svg' | asset_url }}" alt="Arr">
+              </div>
+            {% endif %}
+          {% endfor %}
+          <a
+            href="{{ collection.url }}"
+            class="flex items-center justify-center z-10 appearance-none rounded-full md:w-[100px] w-full h-[60px] border-2 cursor-pointer text-sm"
+          >
+            {{ 'products.facets.clear' | t }}
+          </a>
+        </form>
+      {% endif %}
+    </div>
+    <!-- Product Count -->
+    <p class="text-xl">
+      {{ 'sections.custom.products_found' | t }}: [ <span>{{ collection.products_count }}</span> ]
+    </p>
+
+    <!-- Products Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-5" id="product-grid">
+      {% for product in collection.products %}
+        <div class="product-item bg-white rounded mt-6 hidden flex-col" data-index="{{ forloop.index }}">
+          <a href="{{ product.url }}">
+            <img class="w-full h-[250px] object-cover" src="{{ product.featured_image | image_url}}" alt="Product Image">
+          </a>
+          <div class="flex flex-col items-center w-full p-5 gap-3 justify-between h-full">
+            <div class="w-full">
+              <h5 class="font-neue-b pb-2">{{ product.title }}</h5>
+              <div class="text-start font-neue-l text-sm min-h-[80px] flex flex-col gap-1">
+                {{ product.description }}
+              </div>
+            </div>
+            <div class="flex w-full justify-between gap-3">
+              <button class="flex justify-center items-center rounded-2xl w-4/12 py-3.5 bg-background font-bold">
+                <i>{{ product.price | money }}</i>
+              </button>
+              <a class="w-8/12" href="{{ product.url }}" target="_blank">
+                <button class="flex cursor-pointer justify-center items-center rounded-2xl w-full py-3.5 bg-black text-white hover:bg-main-blue duration-150 transition-all font-neue-m">
+                  {{ 'sections.custom.details' | t }}
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Show More Button -->
+    <button class="show-more-products mt-7 text-sm mx-auto cursor-pointer text-white bg-main-blue rounded-2xl font-neue-m w-[230px] md:hover:w-[180px] md:hover:bg-black duration-100 transition-all h-[50px]">
+      {{ 'sections.custom.show_more' | t }}
+    </button>
+  </div>
+</section>
+
+{% render 'show-more-logic' %}
+
+{% schema %}
+{
+  "name": "Product Grid Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Заголовок",
+      "default": "Каталог моторів:"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Grid Section"
+    }
+  ]
+}
+{% endschema %}

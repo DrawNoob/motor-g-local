@@ -1,0 +1,68 @@
+<div class="responsive-padding bg-white py-[70px]">
+  <div class="max-w-[1440px] mx-auto">
+    <h3 class="pb-7 md:text-3xl text-2xl font-neue-m reveal-left">
+      {{ section.settings.title }}
+    </h3>
+
+    <div class="grid md:grid-cols-3 grid-cols-1 gap-10">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% assign file = block.settings.video_file %}
+          {% assign url = block.settings.video_url | strip %}
+
+          {% if file != blank %}
+            {{ file | video_tag: controls: false, muted: true, loop: true, class: 'w-full h-[300px] object-contain' }}
+          {% elsif url != blank %}
+            <iframe width="100%" height="300" src="{{ url }}" frameborder="0" allowfullscreen></iframe>
+          {% else %}
+            <iframe width="100%" height="300" src="https://www.youtube.com/embed/zp4DsfBnv4Y" frameborder="0" allowfullscreen></iframe>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        {% assign fallback_videos = 'https://www.youtube.com/embed/zp4DsfBnv4Y,https://www.youtube.com/embed/DDfGntjotGc,https://www.youtube.com/embed/qbd3b98cpR4' | split: ',' %}
+        {% for video in fallback_videos %}
+          <iframe width="100%" height="300" src="{{ video }}" frameborder="0" allowfullscreen></iframe>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Video About Us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Заголовок секції",
+      "default": "Відео про нас:"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video_block",
+      "name": "Відео",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video_file",
+          "label": "Завантажене відео (mp4/webm)"
+        },
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "Посилання на відео (YouTube/Vimeo)",
+          "default": "https://www.youtube.com/embed/zp4DsfBnv4Y"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Video About Us"
+    }
+  ]
+}
+{% endschema %}

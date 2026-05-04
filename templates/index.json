@@ -1,0 +1,213 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "theme.custom",
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "settings": {
+        "motor_link": "",
+        "word_1": "FPV_",
+        "word_2": "Мультикоптер_",
+        "word_3": "Важких_",
+        "word_4": "Літакового типу_",
+        "mobile_heading": "Якісні мотори для дронів",
+        "bottom_paragraph": "Наші електромотори для <br> мілітарного використання <br> є Battle approved"
+      }
+    },
+    "main-page-motors": {
+      "type": "main-page-motors",
+      "settings": {
+        "heading": "Наші електромотори для <br> мілітарного використання є <br> Battle approved",
+        "left_motor": "FVP",
+        "middle_motor": "Важкі дрони",
+        "right_motor": "Літакового типу"
+      }
+    },
+    "main-page-effectivity": {
+      "type": "main-page-effectivity",
+      "settings": {
+        "header_logo": "shopify://shop_images/header-logo.png",
+        "main_heading": "Еффективність у <br> кожній деталі",
+        "feature_text_1": "Електромагнітні характеристики оптимізовані власним R&D відділом для досягнення найбільшої ефективності при польоті (грам/Ватт)",
+        "feature_text_2": "Кожен мотор проходить ряд електричних тестів перед відвантаженням, що значно зменшує ризик браку",
+        "feature_text_3": "Всі мотори балансуються з точністю до 0,005 г на спеціалізованому обладнанні",
+        "feature_text_4": "Всі елементи підібрані із розрахунку на мілітарне використання в безпілотних системах"
+      }
+    },
+    "main-page-chart": {
+      "type": "main-page-chart",
+      "settings": {
+        "min_value": 1500,
+        "max_value": 3300,
+        "chart_data": "[\n  [\"Throttle, % (ESC)\", \"Motor-G 900KV\", \"Xing 31 10 900KV\"],\n  [\"50%\", 1900, 1850],\n  [\"70%\", 1900, 1850],\n  [\"80%\", 2300, 2200],\n  [\"90%\", 2700, 2550],\n  [\"100%\", 3150, 2850]\n]",
+        "propeler_title": "Пропелер 1045"
+      }
+    },
+    "product-similar": {
+      "type": "product-similar",
+      "blocks": {
+        "product_qq6WM8": {
+          "type": "product",
+          "settings": {
+            "product": "motor-3110"
+          }
+        },
+        "product_hHTadQ": {
+          "type": "product",
+          "settings": {
+            "product": "motor-3115"
+          }
+        },
+        "product_hgzKQA": {
+          "type": "product",
+          "settings": {
+            "product": "motor-2820"
+          }
+        },
+        "product_WHnK9y": {
+          "type": "product",
+          "settings": {
+            "product": "motor-4121"
+          }
+        },
+        "product_6wFtQE": {
+          "type": "product",
+          "settings": {
+            "product": "motor-3115"
+          }
+        },
+        "product_byVACc": {
+          "type": "product",
+          "settings": {
+            "product": "motor-2820"
+          }
+        }
+      },
+      "block_order": [
+        "product_qq6WM8",
+        "product_hHTadQ",
+        "product_hgzKQA",
+        "product_WHnK9y",
+        "product_6wFtQE",
+        "product_byVACc"
+      ],
+      "settings": {
+        "title": "Схожі продукти:"
+      }
+    },
+    "tech-support": {
+      "type": "tech-support",
+      "settings": {
+        "heading": "Технічна підтримка",
+        "description": "Проконсультуйся з експертом щоб\nоприділити ваші потреби",
+        "button_label": "Написати нам",
+        "modal_title": "Задайте питання",
+        "highlevel_embed_url": "https://api.leadconnectorhq.com/widget/form/PRi1UHAWgU8WcS3vF8pz"
+      }
+    },
+    "main-page-accordions": {
+      "type": "main-page-accordions",
+      "blocks": {
+        "accordion_item_bGJbR4": {
+          "type": "accordion-item",
+          "settings": {
+            "title": "Motor-G це електромотори для БПЛА Українського виробництва?",
+            "description": "Так, наше виробництво знаходиться безпосередньо в Україні. Ми намагаємось досягти максимально можливого рівня локалізації, тому постійно працюємо над удосконаленням технології і розширенням списку елементів, які виготовляються в Україні."
+          }
+        },
+        "accordion_item_pzHrJG": {
+          "type": "accordion-item",
+          "settings": {
+            "title": "Яка ціна на мотори Motor-G?",
+            "description": "Ціни на основні типи моторів вказані на нашому сайті. Зверніть увагу, що вартість товару залежить від розміру замовлень. Тож чи більше замовлення, тим нижча ціна. При оптових замовленнях (більше 4000 шт за 1 раз) можливі спеціальні умови, які обговорюються окремо."
+          }
+        },
+        "accordion_item_VAny89": {
+          "type": "accordion-item",
+          "settings": {
+            "title": "Як можна замовити мотори Motor-G?",
+            "description": "Ви можете замовити нашу продукцію через наш сайт або зв'язавшись із відділом продажу за контактами внизу сторінки. Для корпоративних клієнтів ми також пропонуємо оптові поставки та індивідуальні умови співпраці."
+          }
+        },
+        "accordion_item_hBAJRP": {
+          "type": "accordion-item",
+          "settings": {
+            "title": "Чи можете ви розробити індивідуальний дизайн мотора?",
+            "description": "Так, у нас є власний R&D відділ, тож ми можемо розробити мотор під індивідуальні задачі, або ж допомогти підібрати щось серед уже наявних рішень. Звісно, підбір з наявних рішень це більш проста задача, тому що на розробку нового мотору потрібен не один місяць часу."
+          }
+        },
+        "accordion_item_jXbBwR": {
+          "type": "accordion-item",
+          "settings": {
+            "title": "Як швидко ви виготовляєте мотори?",
+            "description": "Звісно все залежить від розміру партії та типу мотору. Ми стараємось підтримувати наявність на складі на найбільш популярні моделі. Якщо замовлення невелике, то виконати його можемо впродовж декількох днів. Якщо ж це оптове довгострокове замовлення, то умови поставки слід обговорити з нашим відділом продажу. Ми побудували виробництво по принципу Lean Manufacturing, тож вам не потрібно буде чекати поки ми завершимо виробництво всієї партії, тому що ми зможемо робити відвантаження поступово, по мірі виробництва."
+          }
+        },
+        "accordion_item_xCaT9L": {
+          "type": "accordion-item",
+          "settings": {
+            "title": "Скільки моторів ви можете виробляти на місяць?",
+            "description": "Продуктивність нашого підприємства постійно росте. Актуальну спроможність на сьогоднішній день ви можете уточнити у наших менеджерів."
+          }
+        },
+        "accordion_item_iiPpHh": {
+          "type": "accordion-item",
+          "settings": {
+            "title": "Чи надаєте ви технічну консультацію з підбору моторів?",
+            "description": "Так, це є однією з наших переваг, як локального виробника. Ми допоможемо вам підібрати мотор під ваш сетапу (пропелер, акумулятор, вагу та швидкість дрона), виготовимо тестові зразки з нестандартним KV, підготуємо тест репорти тощо."
+          }
+        },
+        "accordion_item_BJaET9": {
+          "type": "accordion-item",
+          "settings": {
+            "title": "Як ви забезпечуєте якість продукції?",
+            "description": "Якість продукції це наша окрема гордість. Кожен мотор проходить мінімум 5 етапів перевірки перед відправкою, тож в впевнені в якості наших моторів. Навіть якщо щось піде не так, то ми можемо швидко зреагувати на ситуацію і внести необхідні зміни."
+          }
+        }
+      },
+      "block_order": [
+        "accordion_item_bGJbR4",
+        "accordion_item_pzHrJG",
+        "accordion_item_VAny89",
+        "accordion_item_hBAJRP",
+        "accordion_item_jXbBwR",
+        "accordion_item_xCaT9L",
+        "accordion_item_iiPpHh",
+        "accordion_item_BJaET9"
+      ],
+      "settings": {
+        "section_title": "Маєш запитання?",
+        "video": "shopify://files/videos/video.webm"
+      }
+    },
+    "callback-form": {
+      "type": "callback-form",
+      "settings": {
+        "title": "Форма\nзворотнього\nзв'язку",
+        "form_title": "Залишились\nпитання?",
+        "button_label": "Написати нам",
+        "footer_text": "Після отримання\nвашої заявки,\nзвяжимось з вами\n<span class=\"text-main-blue\">протягом 48 годин</span>",
+        "modal_title": "Задайте питання",
+        "highlevel_embed_url": "https://api.leadconnectorhq.com/widget/form/PRi1UHAWgU8WcS3vF8pz"
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "main-page-motors",
+    "main-page-effectivity",
+    "main-page-chart",
+    "product-similar",
+    "tech-support",
+    "main-page-accordions",
+    "callback-form"
+  ]
+}

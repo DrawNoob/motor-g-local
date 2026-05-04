@@ -1,0 +1,58 @@
+<!-- Welcome Section -->
+<section class="responsive-padding bg-background md:pb-16 pb-10">
+  <img class="object-cover max-w-[1440px] mx-auto w-full md:h-[285px] h-[180px]" src="{{ 'catalog.webp' | asset_url }}" alt="Catalog BG">
+</section>
+<section class="responsive-padding bg-background lg:pb-[100px] pb-[50px]">
+  <div class="max-w-[1440px] mx-auto flex flex-col">
+    <h4 class="lg:text-[55px] text-3xl font-neue-m pb-7">{{ section.settings.title }}</h4>
+
+    <!-- Collections Grid -->
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-3 mt-5" id="collection-grid">
+      {% for collection in collections %}
+        <div class="collection-item bg-white rounded mt-6 flex md:flex-row flex-col">
+          <a class="md:w-1/2 w-full" href="{{ collection.url }}">
+            {% if collection.image %}
+              <img class="w-full h-[250px] object-cover" src="{{ collection.image | image_url }}" alt="{{ collection.title }}">
+            {% else %}
+              <div class="w-full h-[250px] bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
+                {{ 'product-1.webp' | asset_url }}
+              </div>
+            {% endif %}
+          </a>
+          <div class="flex flex-col items-center md:w-1/2 w-full p-5 gap-3 justify-between h-full">
+            <div>
+              <h5 class="font-neue-b pb-2 text-center">{{ collection.title }}</h5>
+              <div class="text-start font-neue-l text-sm min-h-[80px] flex flex-col gap-1">
+                {{ collection.description | strip_html | truncate: 120 }}
+              </div>
+            </div>
+            <a class="w-full mt-3" href="{{ collection.url }}">
+              <button class="flex cursor-pointer justify-center items-center rounded-2xl w-full py-3.5 bg-black text-white hover:bg-main-blue duration-150 transition-all font-neue-m">
+                {{ 'sections.custom.details' | t }}
+              </button>
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Grid Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Заголовок",
+      "default": "Каталог колекцій:"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Grid Section"
+    }
+  ]
+}
+{% endschema %}

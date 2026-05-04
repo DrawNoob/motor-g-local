@@ -1,0 +1,119 @@
+<div
+  class="
+    flex md:flex-row flex-col w-full max-w-7xl mx-auto
+    {% if block.settings.reverse %}flex-col-reverse{% endif %}
+    {% if block.settings.space_y %}space-y-4{% endif %}
+    {% if block.settings.space_x %}space-x-4{% endif %}
+    py-{{ block.settings.padding_y }} px-{{ block.settings.padding_x }}
+    justify-{{ block.settings.vertical_align }}
+    items-{{ block.settings.horizontal_align }}
+    gap-{{ block.settings.gap }}
+  "
+  {{ block.shopify_attributes }}
+>
+  {% content_for 'blocks' %}
+</div>
+{% schema %}
+{
+  "name": "Column Row",
+  "tag": null,
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Position"
+    },
+    {
+      "type": "select",
+      "id": "vertical_align",
+      "label": "Horizontal Align",
+      "options": [
+        { "value": "start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "end", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_align",
+      "label": "Vertical Align",
+      "options": [
+        { "value": "auto", "label": "Auto" },
+        { "value": "start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "end", "label": "Bottom" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "select",
+      "id": "padding_y",
+      "label": "Y Padding",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "4", "label": "Small" },
+        { "value": "8", "label": "Medium" },
+        { "value": "12", "label": "Large" },
+        { "value": "16", "label": "Extra Large" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "select",
+      "id": "padding_x",
+      "label": "X Padding",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "4", "label": "Small" },
+        { "value": "8", "label": "Medium" },
+        { "value": "12", "label": "Large" },
+        { "value": "16", "label": "Extra Large" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "select",
+      "id": "gap",
+      "label": "Content Gap",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "1", "label": "XS" },
+        { "value": "2", "label": "S" },
+        { "value": "3", "label": "M" },
+        { "value": "4", "label": "L" },
+        { "value": "5", "label": "XL" },
+        { "value": "10", "label": "XXXL" }
+      ],
+      "default": "0"
+    },
+    {
+      "type": "checkbox",
+      "id": "reverse",
+      "label": "Mobile Reverse Content",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "space_y",
+      "label": "Space Y",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "space_x",
+      "label": "Space X",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Column Row"
+    }
+  ]
+}
+{% endschema %}

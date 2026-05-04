@@ -1,0 +1,133 @@
+<form id="cart-form" action="{{ routes.cart_url }}" method="post">
+  <h1 class="w-full uppercase font-neue-m lg:text-4xl text-2xl md:pt-24 pt-12 pb-6 max-w-[1260px] lg:px-[30px] px-4 mx-auto">
+    {{ 'templates.cart.cart' | t }}
+  </h1>
+
+  {% if cart.items.size == 0 %}
+    <div class="text-center pt-10 pb-44">
+      <p class="lg:text-4xl text-2xl font-neue-b text-main-aqua">{{ 'sections.cart.empty' | t }}</p>
+      <div class="mt-5">
+        <a href="{{ routes.all_products_collection_url }}" class="text-main-aqua underline hover:scale-110 duration-150">
+          {{ 'general.continue_shopping' | t }}
+        </a>
+      </div>
+    </div>
+  {% else %}
+    <div class="flex lg:flex-row flex-col max-w-[1260px] lg:px-[30px] px-4 mx-auto gap-10 pb-[80px]">
+      <div class="lg:w-2/3 cart-block w-full flex flex-col">
+        {% for item in cart.items %}
+          <div class="border-b-[1px] border-light-gray"></div>
+          <div
+            class="product-container flex lg:flex-row flex-col items-center font-neue-m lg:border-b-[1px] border-b-none border-light-gray py-6"
+            data-key="{{ item.key }}"
+          >
+            <div class="lg:w-3/12 w-full flex justify-center lg:justify-start gap-5 items-center border-b lg:border-none border-light-gray">
+              <a href="{{ item.product.url }}">
+                <img class="w-full max-h-[350px] lg:h-[200px] shadow object-cover aspect-square" src="{{ item.image | image_url }}" alt="Product">
+              </a>
+            </div>
+            <div class="lg:w-9/12 lg:pl-6 w-full flex flex-col items-center h-full justify-between lg:gap-0 gap-2 mt-2">
+              <!-- Name -->
+              <div class="flex w-full items-center justify-between lg:mt-0 mt-2">
+                <div class="flex items-center gap-4 ">
+                  <p class="text-xl font-neue-m">{{ 'products.product.product_name' | t }}:</p>
+                  <p class="text-sm text-main-gray font-neue-r">{{ item.product.title }}</p>
+                </div>
+                <button class="remove-item cursor-pointer underline text-xs" data-key="{{ item.key }}">
+                  <img class="hover:scale-110 duration-150 transition-all" src="{{ 'close.svg' | asset_url }}" alt="Close">
+                </button>
+              </div>
+              <!-- Item Price -->
+              <div class="w-full flex items-center gap-4 ">
+                <p class="text-xl font-neue-m">{{ 'sections.cart.headings.price' | t }}:</p>
+                {% assign unit_original_price = item.original_line_price | divided_by: item.quantity %}
+                {% assign unit_discounted_price = item.final_line_price | divided_by: item.quantity %}
+
+                <p class="text-sm text-main-gray font-neue-r unit-price" data-key="{{ item.key }}">
+                  {{ unit_discounted_price | money }}
+                </p>
+                {% if unit_original_price > unit_discounted_price %}
+                  {% assign discount_fixed = unit_original_price | minus: unit_discounted_price %}
+                  <span class="text-white bg-main-blue px-3 py-1 text-sm">− {{ discount_fixed | money }}</span>
+                {% endif %}
+              </div>
+
+              <!-- KV -->
+              <div class="w-full flex items-center gap-4 ">
+                <p class="text-xl font-neue-m">{{ 'sections.custom-cart.kv' | t }}:</p>
+                <p class="text-sm text-main-gray font-neue-r">{{ item.variant.option1 }}</p>
+              </div>
+              <!-- Quantity -->
+              <div class="flex lg:flex-row flex-col w-full lg:items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="flex gap-1 items-center">
+                    <p class="text-xl font-neue-m pr-4">{{ 'products.product.quantity.label' | t }}:</p>
+                    <p
+                      class="quantity-decrease text-3xl cursor-pointer hover:scale-105 text-gray-400 w-3 select-none"
+                      data-key="{{ item.key }}"
+                    >
+                      −
+                    </p>
+                    <input
+                      type="number"
+                      class="quantity-input w-16 text-center text-xl border-none"
+                      min="1"
+                      value="{{ item.quantity }}"
+                      data-key="{{ item.key }}"
+                    >
+                    <p
+                      class="quantity-increase text-3xl cursor-pointer hover:scale-105 w-3 select-none"
+                      data-key="{{ item.key }}"
+                    >
+                      +
+                    </p>
+                  </div>
+                </div>
+                <p
+                  class="total-price text-[30px] lg:text-right"
+                  data-key="{{ item.key }}"
+                >
+                  {{ item.final_line_price | money }}
+                </p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="lg:w-1/3 w-full flex flex-col gap-4 lg:p-[30px] bg-main-blue p-[18px]">
+        <p class="checkout-total text-2xl font-neue-m text-white flex justify-between items-center border-b-2 border-white pb-[30px]">{{ 'sections.custom-cart.order' | t }}:</p>
+        <div class="flex flex-col gap-5 py-[30px] text-white text-xl font-neue-m">
+          <div class="flex justify-between items-center">
+            <p>{{ 'customer.order.total' | t }}</p>
+            <p class="cart-subtotal text-base font-neue-l">
+              {{ cart.items | map: 'original_line_price' | sum | money }}
+            </p>
+          </div>
+          {% assign discount = cart.items | map: 'original_line_price' | sum | minus: cart.items_subtotal_price %}
+
+          <div id="cart-summary-target" class="space-y-2">
+            {% if discount > 0 %}
+              <div class="discount-container flex justify-between items-center">
+                <p>{{ 'customer.order.discount' | t }}</p>
+                <p class="cart-discount text-base font-neue-l font-bold">- {{ discount | money_without_trailing_zeros }}</p>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        <p class="checkout-total text-2xl font-neue-m text-white flex justify-between items-center border-t-2 border-white pt-[30px]">
+          {{ 'sections.cart.headings.total' | t }}
+          <span class="total text-base font-neue-l">{{ cart.items_subtotal_price | money }}</span>
+        </p>
+        <button
+          class="h-[60px] flex items-center justify-center bg-transparent border-2 border-white text-white duration-150 w-full rounded-full hover:bg-white hover:text-main-blue cursor-pointer"
+          type="submit"
+          name="checkout"
+          value="Checkout"
+        >
+          {{ 'customer.orders.order_number' | t }}
+        </button>
+      </div>
+    </div>
+  {% endif %}
+</form>

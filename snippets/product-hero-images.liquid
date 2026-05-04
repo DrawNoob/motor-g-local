@@ -1,0 +1,21 @@
+<!-- Images -->
+<div class="lg:w-7/12 w-full flex flex-col gap-4 bg-background z-10">
+  {% if product.media.size > 0 %}
+    {% assign first_media = product.media[0] %}
+    {% if first_media.media_type == 'image' %}
+      <img class="aspect-[4/3] w-full object-cover mx-auto" src="{{ first_media | image_url }}" alt="{{ product.title }}">
+    {% elsif first_media.media_type == 'video' or first_media.media_type == 'external_video' %}
+      {{ first_media | video_tag: controls: true, autoplay: true, muted: true, loop: true, playsinline: true, class: 'aspect-[4/3] w-full object-cover rounded mx-auto' }}
+    {% endif %}
+  {% endif %}
+
+  <div class="grid grid-cols-2 md:gap-5 gap-2">
+    {% for media in product.media offset: 1 limit: 2 %}
+      {% if media.media_type == 'image' %}
+        <img class="aspect-square w-full object-cover" src="{{ media | image_url }}" alt="{{ product.title }}">
+      {% elsif media.media_type == 'video' or media.media_type == 'external_video' %}
+        {{ media | video_tag: controls: true, autoplay: true, muted: true, loop: true, playsinline: true, class: 'aspect-square w-full object-cover rounded' }}
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

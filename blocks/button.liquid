@@ -1,0 +1,113 @@
+<style>
+  @media (max-width: 768px){
+      .button-mobile {
+        width: {{ block.settings.mobile_width }}%;
+      }
+    }
+</style>
+
+<a class="flex justify-{{ block.settings.btn_position }}" href="{{ block.settings.button_link }}">
+  <button
+    class="button-mobile text-main bg-button {% if block.settings.rounded %}rounded-full{% endif %}"
+    style="
+      width: {{ block.settings.desktop_width }}%;
+      height: {{ block.settings.button_height }}px;
+      background-color: {{ block.settings.bg_color }};
+      color: {{ block.settings.text_color }};
+    "
+  >
+    {{ block.settings.button_text }}
+  </button>
+</a>
+
+{% schema %}
+{
+  "name": "Button",
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Where to buy?"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "btn_position",
+      "label": "Button Position",
+      "options": [
+        { "value": "start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "end", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Button colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Button size"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width",
+      "label": "Desktop Width (%)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "mobile_width",
+      "label": "Mobile Width (%)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "button_height",
+      "label": "Button Height (px)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 67
+    },
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "label": "Rounded corners",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Button"
+    }
+  ]
+}
+{% endschema %}

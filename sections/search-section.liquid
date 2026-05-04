@@ -1,0 +1,176 @@
+{% stylesheet %}
+  input[type='search']::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .search-container {
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .search-container.show {
+    opacity: 1;
+    transform: translateY(0);
+    display: flex;
+  }
+  /* Results Container --------------------------------- */
+  .global-search-results.show {
+    display: block;
+  }
+  /* Scrollabar --------------------------------- */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #d8ccbb;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #807154;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #d0a370;
+    cursor: pointer;
+  }
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9;
+    display: none;
+  }
+{% endstylesheet %}
+
+<div class="flex justify-center w-full md:pt-16 md:pb-36 pt-8 pb-56 h-[75vh]">
+  <div class="relative flex flex-col md:items-center items-start md:w-8/12 w-11/12">
+    <h1 class="font-emilio text-4xl">{{ section.settings.heading }}</h1>
+    <input
+      class="md:px-7 px-4 md:py-7 py-4 bg-background rounded-xl w-full md:mt-8 mt-4"
+      type="search"
+      id="predictive-search-input"
+      aria-label="Search Field"
+      placeholder="{{ section.settings.search_placeholder }}"
+    >
+    <p class="mt-4 w-full write">{{ section.settings.description }}</p>
+    <!-- Search Results Container -->
+
+    <div class="global-search-results hidden max-h-[480px] rounded-2xl p-[15px] absolute md:top-[180px] top-[130px] w-full bg-background">
+      <div class="w-full md:px-8 py-8 px-4">
+        <div class="search-product-container bg-background w-full flex md:flex-row flex-col md:gap-8 gap-5">
+          <div class="md:w-5/12 w-full flex flex-col">
+            <h2 class="pb-4 border-b-[1px] w-full border-secondary text-main font-neue-l text-sm uppercase tracking-widest">{{ 'templates.search.suggestions' | t }}</h2>
+            <div class="mt-5" id="predictive-search-collections"></div>
+          </div>
+          <div class="md:w-7/12 w-full flex flex-col">
+            <h2 class="pb-4 border-b-[1px] w-full border-secondary text-main font-neue-l text-sm uppercase tracking-widest">{{ 'templates.search.products' | t }}</h2>
+            <!-- Product Container -->
+            <div
+              class="custom-scrollbar md:bottom-auto bg-background z-[1000] overflow-y-scroll flex flex-col overflow-x-hidden w-full h-[220px]"
+              id="predictive-search-results"
+            ></div>
+          </div>
+        </div>
+        <div class="w-full flex justify-between pt-5 border-t-[1px] border-secondary mt-5">
+          <p>{{ 'general.search.search' | t }} " <span class="text-xl tracking-widest font-neue-b" id="duplicate"></span> "</p>
+          <a href="#">
+            <img class="w-7" src="{{ 'icon-arrow.svg' | asset_url }}" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Predictive Search -------------------------------------------------------------------------------------------------------------
+  document.getElementById('predictive-search-input').addEventListener('input', async function (event) {
+    const query = event.target.value.trim();
+    const resultsContainer = document.querySelector('.global-search-results');
+    const duplicateSpan = document.getElementById('duplicate');
+    const description = document.querySelector('.write');
+
+    duplicateSpan.textContent = query;
+
+    if (query.length > 0) {
+      description.style.display = 'none';
+    } else {
+      description.style.display = 'block';
+    }
+
+    if (query.length < 2) {
+      resultsContainer.classList.remove('show');
+      document.getElementById('predictive-search-results').innerHTML = '';
+      document.getElementById('predictive-search-collections').innerHTML = '';
+      return;
+    }
+
+    resultsContainer.classList.add('show');
+
+    try {
+      const response = await fetch(`/search/suggest.json?q=${query}&resources[type]=product,collection`);
+      const data = await response.json();
+
+      const products = data.resources.results.products || [];
+      const collections = data.resources.results.collections || [];
+
+      let productsHTML =
+        products.length > 0
+          ? products
+              .map(
+                (product) => `
+                    <a href="${product.url}" class="flex items-center gap-5 py-2 hover:underline">
+                        <div class="max-w-[100px]">
+                          <img class="h-[80px] w-auto mx-auto" src="${product.featured_image.url}" alt="${product.title}">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                          <span class="text-sm">${product.title.length > 40 ? product.title.slice(0, 25) + '...' : product.title}</span>
+                          <span class="text-sm text-mustarda">${product.price}</span>
+                        </div>
+                    </a>
+                `
+              )
+              .join('')
+          : '<p class="mt-5 text-sm text-gray-500">No products found</p>';
+
+      document.getElementById('predictive-search-results').innerHTML = productsHTML;
+
+      let collectionsHTML =
+        collections.length > 0
+          ? collections.map((collection) => `<a href="${collection.url}" class="block hover:underline">${collection.title}</a>`).join('')
+          : '<p class="text-sm text-gray-500">No suggestions found</p>';
+
+      document.getElementById('predictive-search-collections').innerHTML = collectionsHTML;
+    } catch (error) {
+      console.error('Search error:', error);
+    }
+  });
+
+  // ------------------------------------------------------------------------------------------------------------------------------
+</script>
+
+{% schema %}
+{
+  "name": "Search Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Search"
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search Placeholder",
+      "default": "Search"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "* Write product, name, size etc..."
+    }
+  ]
+}
+{% endschema %}

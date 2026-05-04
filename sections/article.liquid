@@ -1,0 +1,39 @@
+<div class="w-full mx-auto max-w-{{ section.settings.width }} md:px-0 px-4 flex flex-col pt-5 pb-10">
+  <img class="w-11/12 mx-auto rounded-2xl object-cover object-center min-h-[300px] max-h-[400px]" src="{{ article.image | image_url }}" alt="{{ article.title }}">
+  <div class="flex flex-col md:gap-10 gap-5 md:w-9/12 w-full mx-auto mt-10">
+    <h1 class="md:text-3xl text-2xl font-emilio text-main">{{ article.title }}</h1>
+    <div class="flex justify-between md:flex-row flex-col">
+      <div class="flex gap-3">
+        <p class="bg-background px-5 py-2 w-max rounded-full text-xs md:text-sm uppercase font-neue-m">{{ article.published_at | date: '%B %d, %Y' }}</p>
+        <p class="bg-background px-5 py-2 w-max rounded-full text-xs md:text-sm uppercase font-neue-m">{{ article.author }}</p>
+      </div>
+      <div class="flex gap-3">
+        <a class="bg-background rounded-full w-10 h-10 flex justify-center items-center" href="#">
+          {% comment %} <img class="w-5 h-5" src="{{ 'repost_icon.svg' | asset_url }}" alt="Icon"> {% endcomment %}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Max Width",
+      "options": [
+        { "value": "[1280px]", "label": "1280" },
+        { "value": "[1400px]", "label": "1400" },
+        { "value": "[1440px]", "label": "1440" },
+        { "value": "[1680px]", "label": "1680" },
+        { "value": "[1920px]", "label": "1920" },
+        { "value": "full", "label": "Full" }
+      ],
+      "default": "[1400px]"
+    }
+  ]
+}
+{% endschema %}

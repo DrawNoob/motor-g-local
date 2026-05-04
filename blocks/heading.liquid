@@ -1,0 +1,116 @@
+<div
+  style="    color: {{ block.settings.text_color }};"
+  class="
+    text-block text-{{ block.settings.alignment }}
+    md:text-{{ block.settings.font_size }} text-{{ block.settings.font_size_mob }}
+    pt-{{ block.settings.padding_top }}
+    pb-{{ block.settings.padding_bottom }}
+  "
+>
+  <{{ block.settings.heading_tag }}>
+    {{ block.settings.heading }}
+  </{{ block.settings.heading_tag }}>
+</div>
+
+{% schema %}
+{
+  "name": "Heading",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Text",
+      "default": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "FontSize",
+      "options": [
+        { "value": "sm", "label": "Small" },
+        { "value": "base", "label": "Medium" },
+        { "value": "lg", "label": "Large" },
+        { "value": "xl", "label": "Extra Large" },
+        { "value": "2xl", "label": "2XL" },
+        { "value": "3xl", "label": "3XL" },
+        { "value": "4xl", "label": "4XL" },
+        { "value": "5xl", "label": "5XL" }
+      ],
+      "default": "2xl"
+    },
+    {
+      "type": "select",
+      "id": "font_size_mob",
+      "label": "FontSize Mob",
+      "options": [
+        { "value": "sm", "label": "Small" },
+        { "value": "base", "label": "Medium" },
+        { "value": "lg", "label": "Large" },
+        { "value": "xl", "label": "Extra Large" },
+        { "value": "2xl", "label": "2XL" },
+        { "value": "3xl", "label": "3XL" },
+        { "value": "4xl", "label": "4XL" },
+        { "value": "5xl", "label": "5XL" }
+      ],
+      "default": "base"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "Alignment",
+      "default": "center"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "select",
+      "id": "padding_top",
+      "label": "Top padding",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "4", "label": "Small" },
+        { "value": "8", "label": "Medium" },
+        { "value": "12", "label": "Large" },
+        { "value": "16", "label": "Extra Large" }
+      ],
+      "default": "0"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "4", "label": "Small" },
+        { "value": "8", "label": "Medium" },
+        { "value": "12", "label": "Large" },
+        { "value": "16", "label": "Extra Large" }
+      ],
+      "default": "0"
+    }
+  ],
+  "presets": [{ "name": "Heading" }]
+}
+{% endschema %}

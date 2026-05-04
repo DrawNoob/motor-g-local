@@ -1,0 +1,109 @@
+<!-- ZMI About Us -->
+<section class="responsive-padding bg-white py-[70px]">
+  <div class="max-w-[1440px] mx-auto">
+    <h3 class="pb-7 md:text-3xl text-2xl font-neue-m reveal-left">
+      {{ section.settings.title }}
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 xl:gap-[60px] md:gap-[20px] gap-[30px]">
+      {% for block in section.blocks %}
+        <div class="flex flex-col gap-4 justify-between h-full" {{ block.shopify_attributes }}>
+          <div class="flex flex-col gap-4">
+            {% if block.settings.image %}
+              <img class="h-[300px] object-cover" src="{{ block.settings.image | image_url }}" alt="Media Logo">
+            {% else %}
+              <img class="h-[300px] object-cover" src="{{ 'bro.webp' | asset_url }}" alt="Media Logo">
+            {% endif %}
+            <div class="flex justify-between">
+              <p class="font-neue-m">{{ block.settings.name }}</p>
+              <p class="text-main-gray font-neue-m">{{ block.settings.date }}</p>
+            </div>
+            <h4 class="uppercase font-neue-b text-xl md:text-base xl:text-[18px] min-h-[81px]">
+              {{ block.settings.title }}
+            </h4>
+            <p class="font-neue-r lg:text-base md:text-sm text-base min-h-[96px]">
+              {{ block.settings.text | truncate: 160 }}
+            </p>
+          </div>
+          <a class="flex items-center justify-between w-full text-main-blue lg:border-b-4 border-b-2 py-4 px-0 hover:px-4 duration-200" href="{{ block.settings.link }}" target="_blank">
+            <p class="font-neue-b text-xl">{{ 'blogs.article.read_more_title' | t }}</p>
+            <img class="w-5 h-5" src="{{ 'arrow-right.svg' | asset_url }}" alt="Arrow">
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "ZMI About Us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Заголовок секції",
+      "default": "ЗМІ про нас:"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "media_post",
+      "name": "Блок публікації",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Зображення"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Автор",
+          "default": "Олександр Ян"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Дата",
+          "default": "20 березня"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Заголовок",
+          "default": "Наші електромотори для мілітарного використання є Battle approved"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Опис",
+          "default": "Кожен мотор проходить ряд електричних тестів перед відвантаженням, що значно зменшує ризик..."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Посилання на статтю"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "ZMI About Us",
+      "blocks": [
+        {
+          "type": "media_post"
+        },
+        {
+          "type": "media_post"
+        },
+        {
+          "type": "media_post"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

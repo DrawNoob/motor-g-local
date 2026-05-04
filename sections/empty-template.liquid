@@ -1,0 +1,113 @@
+<div
+  style="
+    background-image: url('{{ section.settings.image | image_url }}');
+    background-color: {{ section.settings.bg_color }};
+    background-repeat: no-repeat;
+    background-size: {{ section.settings.bg_size }};
+    background-position: {{ section.settings.bg_position }};
+    padding-top: {{ section.settings.padding_top | append: 'rem' }};
+    padding-bottom: {{ section.settings.padding_bottom | append: 'rem' }};
+    padding-left: {{ section.settings.padding_x | append: 'rem' }};
+    padding-right: {{ section.settings.padding_x | append: 'rem' }};
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  "
+>
+  <div class="w-full flex flex-col justify-center lg:flex-row">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Empty Section Template",
+  "blocks": [{ "type": "column" }],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "bg_size",
+      "label": "BG Size",
+      "options": [
+        { "value": "contain", "label": "Contain" },
+        { "value": "cover", "label": "Cover" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "select",
+      "id": "bg_position",
+      "label": "BG Position",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Spacing (in rems)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding (rem)",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding (rem)",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "padding_x",
+      "label": "Left/Right padding (rem)",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Background Color"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Empty Section Template",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "vertical_align": "top"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,67 @@
+<!-- White Section -->
+<section class="responsive-padding bg-background md:py-[70px] py-[50px]">
+  <div class="relative flex flex-col items-center max-w-[1440px] mx-auto">
+    {% if section.settings.image_desktop %}
+      <img class="md:block hidden w-full h-[450px] object-cover" src="{{ section.settings.image_desktop | image_url }}" alt="4 Wheel Desktop">
+    {% else %}
+      <img class="md:block hidden w-full h-[450px] object-cover" src="{{ '4-wheel.webp' | asset_url }}" alt="4 Wheel Desktop">
+    {% endif %}
+
+    {% if section.settings.image_mobile %}
+      <img class="md:hidden w-full h-[540px] object-cover" src="{{ section.settings.image_mobile | image_url }}" alt="4 Wheel Mobile">
+    {% else %}
+      <img class="md:hidden w-full h-[540px] object-cover" src="{{ '4-wheel-mob.webp' | asset_url }}" alt="4 Wheel Mobile">
+    {% endif %}
+
+    <div class="absolute pt-[50px] flex flex-col items-center gap-6 md:px-0 px-4">
+      <a href="/" class="logo">
+        <img src="{{ 'header-logo.webp' | asset_url }}" alt="MOTOR-G Logo" class="max-w-[97px]">
+      </a>
+      <p class="lg:text-xl uppercase text-center max-w-[607px] font-neue-b leading-[120%]">
+        {{ section.settings.main_text }}
+      </p>
+      <p class="font-neue-r text-main-gray text-center max-w-[400px] leading-[120%]">
+        {{ section.settings.sub_text }}
+      </p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "White Section with Text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "main_text",
+      "label": "Main Text",
+      "default": "Наші українські електромотори <span class='text-main-blue'>створюються з особливим акцентом на якість</span>, щоб забезпечити високу надійність і стабільність роботи БпЛА."
+    },
+    {
+      "type": "text",
+      "id": "sub_text",
+      "label": "Sub Text",
+      "default": "Відпрацьовані виробничі процеси дозволяють підтримувати високий рівень якості."
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Зображення для десктопу"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Зображення для мобільних"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Us White Section"
+    }
+  ]
+}
+{% endschema %}

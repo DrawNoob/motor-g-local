@@ -1,0 +1,71 @@
+<section class=" bg-main-blue w-full">
+  <div class="flex md:flex-row flex-col-reverse max-w-[3840px] mx-auto">
+    <div class="flex flex-col 4xl:w-[500px] md:w-1/2 w-full 3xl:justify-around justify-between py-10 xl:px-20 lg:px-14 sm:px-10 px-4 md:max-w-[750px] ml-auto">
+      <h2 class="text-white xl:text-[50px] lg:text-[40px] md:text-4xl text-3xl font-neue-m md:pb-0 pb-5">
+        {{ section.settings.heading }}
+      </h2>
+      <div class="flex flex-col">
+        <p class="text-xl font-neue-l text-white">
+          {{ section.settings.description | newline_to_br }}
+        </p>
+        <button class="support-modal-btn cursor-pointer text-white border-b-4 py-4 mt-3 text-xl placeholder:text-white focus:pl-5 bg-no-repeat bg-right flex justify-between items-center">
+          {{ section.settings.button_label }}
+          <img src="{{ 'white-arr.svg' | asset_url }}" alt="">
+        </button>
+      </div>
+    </div>
+
+    <img class="w-1/2 xl:block hidden object-cover min-h-[300px] max-h-[350px] float-left" src="{{ 'tech.webp' | asset_url }}" alt="Image">
+    <img class="w-1/2 xl:hidden md:block hidden object-cover min-h-[300px] max-h-[350px] float-left" src="{{ 'tech-tab.webp' | asset_url }}" alt="Image">
+    <img class="w-full md:hidden" src="{{ 'tech-mob.webp' | asset_url }}" alt="Image">
+  </div>
+
+  <!-- Modal -->
+  {% render 'contact-popup-modal' %}
+</section>
+
+{% schema %}
+{
+  "name": "Tech Support",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Заголовок",
+      "default": "Технічна підтримка"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Опис",
+      "default": "Проконсультуйся з експертом щоб\nоприділити ваші потреби"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Текст кнопки",
+      "default": "Написати нам"
+    },
+    {
+      "type": "header",
+      "content": "Form Data"
+    },
+    {
+      "type": "text",
+      "id": "modal_title",
+      "label": "Заголовок модального вікна",
+      "default": "Задайте питання"
+    },
+    {
+      "type": "url",
+      "id": "highlevel_embed_url",
+      "label": "Highlevel Embed URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tech Support"
+    }
+  ]
+}
+{% endschema %}

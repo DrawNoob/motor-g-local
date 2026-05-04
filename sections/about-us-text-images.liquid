@@ -1,0 +1,99 @@
+<!-- Text & Images -->
+<section class="responsive-padding bg-background md:pt-[100px] pt-10 pb-[70px]">
+  <div class="max-w-[1440px] mx-auto">
+    <h2 class="lg:w-[75%] lg:text-3xl text-xl font-neue-m md:pb-10 pb-7">
+      {{ section.settings.heading }}
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-[10px]">
+      <div class="w-full flex flex-col gap-[10px] reveal-left delay-200">
+        <div class="grid grid-cols-2 gap-[10px] w-full">
+          {% if section.settings.image_1 %}
+            <img class="w-full object-cover max-h-[320px]" src="{{ section.settings.image_1 | image_url }}" alt="Motor 1">
+          {% else %}
+            <img class="w-full object-cover max-h-[320px]" src="{{ 'mot-1.webp' | asset_url }}" alt="Motor 1">
+          {% endif %}
+
+          {% if section.settings.image_2 %}
+            <img class="w-full object-cover max-h-[320px]" src="{{ section.settings.image_2 | image_url }}" alt="Motor 2">
+          {% else %}
+            <img class="w-full object-cover max-h-[320px]" src="{{ 'mot-2.webp' | asset_url }}" alt="Motor 2">
+          {% endif %}
+        </div>
+        <div class="grid grid-cols-1">
+          {% if section.settings.image_3 %}
+            <img class="w-full object-cover max-h-[320px]" src="{{ section.settings.image_3 | image_url }}" alt="Motor 3">
+          {% else %}
+            <img class="w-full object-cover max-h-[320px]" src="{{ 'mot-3.webp' | asset_url }}" alt="Motor 3">
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="w-full grid grid-cols-2 gap-[10px] delay-400">
+        {{
+          section.settings.video
+          | video_tag: controls: false, autoplay: true, muted: true, loop: true, playsinline: true, class: 'w-[99%] h-full mx-auto bg-black overflow-hidden" autoplay muted loop playsinline controls'
+        }}
+        <div class="flex flex-col items-end justify-between">
+          {% if section.settings.image_4 %}
+            <img class="w-full object-cover max-h-[320px]" src="{{ section.settings.image_4 | image_url }}" alt="Motor 4">
+          {% else %}
+            <img class="w-full object-cover max-h-[320px]" src="{{ 'mot-5.webp' | asset_url }}" alt="Motor 4">
+          {% endif %}
+          <p class="md:w-1/2 w-8/12 text-end uppercase text-main-blue font-neue-b delay-600">
+            {{ section.settings.caption }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Text & Images Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Виробництво здійснюється в Україні, з метою досягнення технологічної незалежності. Наш план передбачає використання 70% українських комплектуючих у 2025 році та збільшення цієї частки до 85% у 2026 році."
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Bottom Caption",
+      "default": "Моторно працюємо задля перемоги."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Відео"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Left Part (Top-Left)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Left Part (Top-Right)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Left Part (Bottom)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Right Part (Top-Right)"
+    }
+  ]
+}
+{% endschema %}

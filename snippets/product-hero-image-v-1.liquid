@@ -1,0 +1,23 @@
+<!-- Images Grid 2x2 -->
+<div class="lg:w-7/12 w-full bg-background z-10">
+  <div class="grid grid-cols-2 gap-2 md:gap-5">
+    {% assign media_limit = 4 %}
+    {% assign media_count = 0 %}
+
+    {% for media in product.media %}
+      {% if media_count == media_limit %}
+        {% break %}
+      {% endif %}
+
+      <div class="aspect-square w-full">
+        {% if media.media_type == 'image' %}
+          <img class="w-full h-full object-cover" src="{{ media | image_url }}" alt="{{ product.title }}">
+        {% elsif media.media_type == 'video' or media.media_type == 'external_video' %}
+          {{ media | video_tag: controls: true, autoplay: true, muted: true, loop: true, playsinline: true, class: 'w-full h-full object-cover rounded' }}
+        {% endif %}
+      </div>
+
+      {% assign media_count = media_count | plus: 1 %}
+    {% endfor %}
+  </div>
+</div>

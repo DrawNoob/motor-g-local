@@ -1,0 +1,162 @@
+<style>
+  .swiper-pagination-{{ section.id }} .swiper-pagination-bullet {
+    border: 1px solid #8B97A1;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+  }
+</style>
+
+<!-- Section Similar Products -->
+<section class="bg-background responsive-padding md:py-[70px] py-[50px]">
+  <h2 class="responsive-text max-w-[1440px] mx-auto font-neue-m">{{ section.settings.title }}</h2>
+  <div class="swiper-{{ section.id }} flex items-center max-w-[1440px] mx-auto overflow-hidden">
+    <div class="swiper-wrapper flex">
+      {% for block in section.blocks %}
+        {% assign product = block.settings.product %}
+        {% if product != blank %}
+          <div class="swiper-slide bg-white rounded mt-6 flex flex-col">
+            <a href="{{ product.url }}">
+              <img class="w-full aspect-square object-cover" src="{{ product.featured_image | image_url }}" alt="{{ product.title }}">
+            </a>
+            <div class="flex flex-col items-center justify-between h-full w-full p-5 gap-3">
+              <div class="w-full flex flex-col gap-3">
+                <h5 class="font-neue-b">{{ product.title }}</h5>
+                <div class="font-neue-l text-sm w-full">
+                  {% if product.description != blank %}
+                    {{ product.description }}
+                  {% else %}
+                    {{ 'sections.collection_template.empty' | t }}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="flex w-full justify-between gap-3">
+                <div class="flex justify-center items-center rounded-2xl xl:w-4/12 w-5/12 py-3.5 bg-background font-bold">
+                  <i>{{ product.price | money }}</i>
+                </div>
+                <a class="xl:w-8/12 w-7/12" href="{{ product.url }}" target="_blank">
+                  <button class="flex cursor-pointer justify-center items-center rounded-2xl w-full py-3.5 bg-black text-white hover:bg-main-blue duration-150 transition-all font-neue-m">
+                    {{ 'sections.custom.details' | t }}
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="flex justify-between items-center w-full pt-5 max-w-[1440px] mx-auto">
+    <div class="swiper-pagination-{{ section.id }} w-max flex items-center gap-[10px] h-[20px]"></div>
+    <div class="text-white flex gap-5 items-center">
+      <!-- Prev Button -->
+      <div class="swiper-button-prev-{{ section.id }} cursor-pointer w-8 h-8 flex items-center justify-center [&.swiper-button-disabled>img]:opacity-25">
+        <img class="rotate-180" src="{{ 'blue-arrow.svg' | asset_url }}" alt="Arrow">
+      </div>
+
+      <!-- Next Button -->
+      <div class="swiper-button-next-{{ section.id }} cursor-pointer w-8 h-8 flex items-center justify-center [&.swiper-button-disabled>img]:opacity-25">
+        <img src="{{ 'blue-arrow.svg' | asset_url }}" alt="Arrow">
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function init() {
+      const el = document.querySelector('.swiper-{{ section.id }}');
+      if (!el) return;
+
+      if (el.swiper) el.swiper.destroy(true, true);
+
+      new Swiper(el, {
+        direction: 'horizontal',
+        loop: false,
+        centeredSlides: false,
+        speed: 1000,
+        slidesPerView: 4,
+        spaceBetween: 20,
+        pagination: {
+          el: '.swiper-pagination-{{ section.id }}',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next-{{ section.id }}',
+          prevEl: '.swiper-button-prev-{{ section.id }}',
+        },
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          560: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          769: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 20,
+          },
+        },
+        on: {
+          init: function () {
+            const totalSlides = el.querySelectorAll('.swiper-slide').length;
+            const slidesPerView = this.params.slidesPerView;
+
+            if (totalSlides <= slidesPerView) {
+              el.closest('section').querySelector('.swiper-pagination-{{ section.id }}')?.classList.add('hidden');
+              el.closest('section').querySelector('.swiper-button-prev-{{ section.id }}')?.classList.add('hidden');
+              el.closest('section').querySelector('.swiper-button-next-{{ section.id }}')?.classList.add('hidden');
+            }
+          },
+        },
+      });
+    }
+
+    init();
+
+    document.addEventListener('shopify:section:load', function (e) {
+      if (e.target.querySelector('.swiper-{{ section.id }}')) {
+        init();
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Similar Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Заголовок секції",
+      "default": "Схожі продукти:"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Товар",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Оберіть продукт"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Similar Products"
+    }
+  ]
+}
+{% endschema %}

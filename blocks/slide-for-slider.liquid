@@ -1,0 +1,141 @@
+<div
+  style="
+    background-color: {{ block.settings.bg_color }};
+    border-color: {{ block.settings.border_color }};
+  "
+  class="
+    swiper-slide flex flex-col md:px-0 px-4
+    py-{{ block.settings.padding_y }}
+    px-{{ block.settings.padding_x }}
+    gap-{{ block.settings.gap }}
+    justify-{{ block.settings.vertical_align }}
+    items-{{ block.settings.horizontal_align }}
+    border-{{ block.settings.border_position }}-{{ block.settings.border_size }}
+  "
+  {{ block.shopify_attributes }}
+>
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "Slide",
+  "tag": null,
+  "blocks": [{ "type": "@theme" }],
+  "settings": [
+    {
+      "type": "select",
+      "id": "vertical_align",
+      "label": "Vertical Align",
+      "options": [
+        { "value": "start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "end", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_align",
+      "label": "Horizontal Align",
+      "options": [
+        { "value": "auto", "label": "Auto" },
+        { "value": "start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "end", "label": "Right" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Paddings"
+    },
+    {
+      "type": "select",
+      "id": "padding_y",
+      "label": "Y Padding",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "4", "label": "Small" },
+        { "value": "8", "label": "Medium" },
+        { "value": "12", "label": "Large" },
+        { "value": "16", "label": "Extra Large" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "select",
+      "id": "padding_x",
+      "label": "X Padding",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "4", "label": "Small" },
+        { "value": "8", "label": "Medium" },
+        { "value": "12", "label": "Large" },
+        { "value": "16", "label": "Extra Large" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "select",
+      "id": "gap",
+      "label": "Content Gap",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "1", "label": "XS" },
+        { "value": "2", "label": "S" },
+        { "value": "3", "label": "M" },
+        { "value": "4", "label": "L" },
+        { "value": "5", "label": "XL" },
+        { "value": "10", "label": "XXXL" }
+      ],
+      "default": "0"
+    },
+    {
+      "type": "header",
+      "content": "Custom Border"
+    },
+    {
+      "type": "select",
+      "id": "border_position",
+      "label": "Border Position",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "t", "label": "Top" },
+        { "value": "r", "label": "Right" },
+        { "value": "b", "label": "Bottom" },
+        { "value": "l", "label": "LEft" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "border_size",
+      "label": "Border Size",
+      "options": [
+        { "value": "0", "label": "Small" },
+        { "value": "2", "label": "Default" },
+        { "value": "4", "label": "Huge" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slide (Only for Slider)"
+    }
+  ]
+}
+{% endschema %}

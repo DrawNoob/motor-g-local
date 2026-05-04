@@ -1,0 +1,44 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "theme.custom",
+  "sections": {
+    "main": {
+      "type": "contact",
+      "settings": {
+        "heading": "Наші контакти:",
+        "map_url": "https://maps.google.com/maps?width=561&height=500&hl=en&q=Київ&t=&z=8&ie=UTF8&iwloc=B&output=embed",
+        "email": "info@motor-g.com",
+        "phone": "+38 (063) 941-31-10",
+        "viber_title": "Viber",
+        "viber_link": "tel:+380639413110",
+        "signal_title": "Signal",
+        "signal_link": "https://signal.me/#p/+380639413110",
+        "whatsapp_title": "WhatsApp",
+        "whatsapp_link": "https://wa.me/380639413110"
+      }
+    },
+    "callback-form": {
+      "type": "callback-form",
+      "settings": {
+        "title": "Форма\nзворотнього\nзв'язку",
+        "form_title": "Залишились\nпитання?",
+        "button_label": "Написати нам",
+        "footer_text": "Після отримання\nвашої заявки,\nзвяжимось з вами\n<span class=\"text-main-blue\">протягом 48 годин</span>",
+        "modal_title": "Задайте питання",
+        "highlevel_embed_url": "https://api.leadconnectorhq.com/widget/form/PRi1UHAWgU8WcS3vF8pz"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "callback-form"
+  ]
+}

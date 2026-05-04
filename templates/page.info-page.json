@@ -1,0 +1,101 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "theme.custom",
+  "sections": {
+    "info-page-section": {
+      "type": "info-page-section",
+      "settings": {
+        "subtitle": "Інформативна сторінка",
+        "heading": "Локалізоване виробництво <br> моторів в.....",
+        "description": "розказуємо, що можемо локалізувати виробництво моторів в вашій країні, щоб відповідати <br> нормам по локалізації продукту"
+      }
+    },
+    "info-page-tagline-1": {
+      "type": "info-page-tagline-1",
+      "blocks": {
+        "tagline_item_qA8DDe": {
+          "type": "tagline_item",
+          "settings": {
+            "title": "Subheading one",
+            "text": "Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nSuspendisse varius enim in eros."
+          }
+        },
+        "tagline_item_mfdD4a": {
+          "type": "tagline_item",
+          "settings": {
+            "title": "Subheading one",
+            "text": "Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nSuspendisse varius enim in eros."
+          }
+        }
+      },
+      "block_order": [
+        "tagline_item_qA8DDe",
+        "tagline_item_mfdD4a"
+      ],
+      "settings": {
+        "tagline": "Tagline",
+        "heading": "Medium length section heading goes here",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
+        "button_label": "Написати нам",
+        "button_link": ""
+      }
+    },
+    "info-page-tagline-2": {
+      "type": "info-page-tagline-2",
+      "blocks": {
+        "feature_item_R47ARw": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Medium length section heading goes here",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique."
+          }
+        },
+        "feature_item_PLcCNB": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Medium length section heading goes here",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique."
+          }
+        },
+        "feature_item_ca9cEX": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Medium length section heading goes here",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique."
+          }
+        },
+        "feature_item_eDH8dd": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Medium length section heading goes here",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique."
+          }
+        }
+      },
+      "block_order": [
+        "feature_item_R47ARw",
+        "feature_item_PLcCNB",
+        "feature_item_ca9cEX",
+        "feature_item_eDH8dd"
+      ],
+      "settings": {
+        "tagline": "Tagline",
+        "heading": "Short heading goes here",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      }
+    }
+  },
+  "order": [
+    "info-page-section",
+    "info-page-tagline-1",
+    "info-page-tagline-2"
+  ]
+}

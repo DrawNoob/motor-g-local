@@ -1,0 +1,149 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "theme.custom",
+  "sections": {
+    "product-hero": {
+      "type": "product-hero",
+      "blocks": {
+        "product_slide_R6kVqJ": {
+          "type": "product_slide",
+          "settings": {
+            "product": "motor-3110"
+          }
+        },
+        "product_slide_7RdgiX": {
+          "type": "product_slide",
+          "settings": {
+            "product": "motor-3115"
+          }
+        }
+      },
+      "block_order": [
+        "product_slide_R6kVqJ",
+        "product_slide_7RdgiX"
+      ],
+      "settings": {
+        "image_snippet": "default"
+      }
+    },
+    "product-tabs": {
+      "type": "product-tabs",
+      "blocks": {
+        "table_row_pUPxMh": {
+          "type": "table_row",
+          "settings": {
+            "propeller": "APC 7x11x2",
+            "note_1": "Вага дрона: 1–3 кг",
+            "note_2": "Швидкість: ДО 160 км/год",
+            "kv6s": "1300KV",
+            "kv8s": "900KV",
+            "kv12s": "650KV"
+          }
+        },
+        "table_row_geNaJm": {
+          "type": "table_row",
+          "settings": {
+            "propeller": "HQ 8x6x3",
+            "note_1": "Вага дрона: 2–4 кг",
+            "note_2": "Швидкість: ДО 160 км/год",
+            "kv6s": "1250KV",
+            "kv8s": "850KV",
+            "kv12s": "600KV"
+          }
+        },
+        "table_row_gQbg6K": {
+          "type": "table_row",
+          "settings": {
+            "propeller": "HQ 10x5x3",
+            "note_1": "Вага дрона: 3–6 кг",
+            "note_2": "Швидкість: ДО 70 км/год",
+            "kv6s": "900KV",
+            "kv8s": "600KV",
+            "kv12s": ""
+          }
+        }
+      },
+      "block_order": [
+        "table_row_pUPxMh",
+        "table_row_geNaJm",
+        "table_row_gQbg6K"
+      ],
+      "settings": {
+        "heading_propeller": "Пропелер",
+        "heading_6s": "Акумулятор 6S",
+        "heading_8s": "Акумулятор 8S",
+        "heading_12s": "Акумулятор 12S"
+      }
+    },
+    "about-us-white": {
+      "type": "about-us-white",
+      "settings": {
+        "main_text": "Наші українські електромотори створюються з особливим акцентом на якість, щоб забезпечити високу надійність і стабільність роботи БпЛА.",
+        "sub_text": "Відпрацьовані виробничі процеси дозволяють підтримувати високий рівень якості."
+      }
+    },
+    "tech-support": {
+      "type": "tech-support",
+      "settings": {
+        "heading": "Технічна підтримка",
+        "description": "Проконсультуйся з експертом щоб\nоприділити ваші потреби",
+        "button_label": "Написати нам",
+        "modal_title": "Задайте питання",
+        "highlevel_embed_url": "https://api.leadconnectorhq.com/widget/form/PRi1UHAWgU8WcS3vF8pz"
+      }
+    },
+    "product-similar": {
+      "type": "product-similar",
+      "blocks": {
+        "product_arh87V": {
+          "type": "product",
+          "settings": {
+            "product": "motor-3110"
+          }
+        },
+        "product_RqR7Ep": {
+          "type": "product",
+          "settings": {
+            "product": "motor-3110"
+          }
+        },
+        "product_Kwqmnm": {
+          "type": "product",
+          "settings": {
+            "product": "motor-3110"
+          }
+        },
+        "product_WDCYPH": {
+          "type": "product",
+          "settings": {
+            "product": "motor-3110"
+          }
+        }
+      },
+      "block_order": [
+        "product_arh87V",
+        "product_RqR7Ep",
+        "product_Kwqmnm",
+        "product_WDCYPH"
+      ],
+      "settings": {
+        "title": "Схожі продукти:"
+      }
+    }
+  },
+  "order": [
+    "product-hero",
+    "product-tabs",
+    "about-us-white",
+    "tech-support",
+    "product-similar"
+  ]
+}

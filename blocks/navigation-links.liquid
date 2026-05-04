@@ -1,0 +1,80 @@
+<nav
+  style="gap: {{ block.settings.gap }}rem;"
+  class="
+    flex flex-{{ block.settings.direction }}
+    {% if block.settings.mobile_text %} md:hidden {% endif %}
+    {% if block.settings.desktop_text %} md:flex hidden {% endif %}
+  "
+>
+  {% for link in block.settings.header_nav.links %}
+    <a
+      style="color: {{ block.settings.text_color }};"
+      class="hover:underline duration-100 transition-all"
+      href="{{ link.url }}"
+    >
+      {{- link.title -}}
+    </a>
+  {% endfor %}
+</nav>
+
+{% schema %}
+{
+  "name": "Navigation Links",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "header_nav",
+      "label": "Header Links"
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Direction",
+      "options": [
+        { "value": "row", "label": "Row" },
+        { "value": "col", "label": "Column" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Links Style"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_text",
+      "label": "Only Desktop Visible",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_text",
+      "label": "Only Mobile Visible",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Navigation Links"
+    }
+  ]
+}
+{% endschema %}

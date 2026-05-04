@@ -1,0 +1,142 @@
+<div
+  style="
+        {% if section.settings.image %}
+        background-image: url('{{ section.settings.image | image_url }}');
+    {% endif %}
+        background-color: {{ section.settings.bg_color }};
+  "
+  class="
+    w-full max-w-{{ section.settings.width }} mx-auto
+    flex flex-col pt-{{ section.settings.padding_top }} pb-{{ section.settings.padding_bottom }} px-{{ section.settings.padding_x }}
+    bg-{{ section.settings.bg_size }} bg-{{ section.settings.bg_position }}
+  "
+>
+  <div class="w-full flex flex-col justify-center lg:flex-{{ section.settings.direction }}">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Section For Blocks",
+  "blocks": [{ "type": "@theme" }],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "bg_size",
+      "label": "BG Size",
+      "options": [
+        { "value": "contain", "label": "Contain" },
+        { "value": "cover", "label": "Cover" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "select",
+      "id": "bg_position",
+      "label": "BG Position",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Section Global"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Max Width",
+      "options": [
+        { "value": "[1280px]", "label": "1280" },
+        { "value": "[1400px]", "label": "1400" },
+        { "value": "[1440px]", "label": "1440" },
+        { "value": "[1680px]", "label": "1680" },
+        { "value": "[1920px]", "label": "1920" },
+        { "value": "full", "label": "Full" }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Direction Desktop",
+      "options": [
+        { "value": "row", "label": "Row" },
+        { "value": "col", "label": "Column" }
+      ],
+      "default": "row"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "select",
+      "id": "padding_top",
+      "label": "Top padding",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "4", "label": "Small" },
+        { "value": "8", "label": "Medium" },
+        { "value": "12", "label": "Large" },
+        { "value": "16", "label": "Extra Large" }
+      ],
+      "default": "8"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "4", "label": "Small" },
+        { "value": "8", "label": "Medium" },
+        { "value": "12", "label": "Large" },
+        { "value": "16", "label": "Extra Large" }
+      ],
+      "default": "8"
+    },
+    {
+      "type": "select",
+      "id": "padding_x",
+      "label": "Left/Right padding",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "4", "label": "Small" },
+        { "value": "8", "label": "Medium" },
+        { "value": "12", "label": "Large" },
+        { "value": "16", "label": "Extra Large" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "header",
+      "content": "Background Color"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section Blocks"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,87 @@
+<style>
+  .icon-width-{{ block.id }} {
+    width: {{ block.settings.icon_width }}px;
+    height: {{ block.settings.icon_height }}px;
+  }
+  @media (max-width: 768px) {
+    .icon-width-{{ block.id }} {
+      width: {{ block.settings.icon_width_mob }}px;
+      height: {{ block.settings.icon_height_mob }}px;
+    }
+  }
+</style>
+
+<img
+  loading="lazy"
+  src="{{ block.settings.icon | image_url }}"
+  alt="Icon"
+  class="object-{{ block.settings.image_fit }} icon-width-{{ block.id }}"
+>
+
+{% schema %}
+{
+  "name": "Icon",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icon Image"
+    },
+    {
+      "type": "range",
+      "id": "icon_width",
+      "label": "Icon Width",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "icon_height",
+      "label": "Icon Height",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "default": 60
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "options": [
+        { "value": "contain", "label": "Contain" },
+        { "value": "cover", "label": "Cover" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Width"
+    },
+    {
+      "type": "range",
+      "id": "icon_width_mob",
+      "label": "Icon Width Mobile",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "icon_height_mob",
+      "label": "Icon Height Mobile",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,176 @@
+<footer>
+  <div class="flex w-full max-w-[3840px] mx-auto">
+    <div class="lg:block hidden w-1/2">
+      <img class="w-full object-cover object-center max-h-[730px]" src="{{ 'footer.webp' | asset_url }}" alt="Footer Detail" height="730px">
+    </div>
+    <div class="lg:w-1/2 w-full md:py-0 py-10 md:px-0 px-4">
+      <!-- Top Cols -->
+      <div class="flex md:flex-row flex-col w-full lg:h-[50%] md:h-[300px] md:border-b-[1px] border-light-gray">
+        <div class="md:w-1/2 w-full md:border-r-[1px] border-light-gray xl:p-[50px] lg:p-8 md:p-5 md:border-b-none border-b-[1px] md:pb-0 pb-5">
+          <div class="flex justify-between items-end">
+            <a href="#">
+              <img class="max-w-[140px]" src="{{ section.settings.footer-logo | image_url }}" alt="Logo">
+            </a>
+            <!-- Language Selector -->
+            <div class="md:hidden block relative z-40 language-selector">
+              <button class="cursor-pointer hover:shadow lang-btn flex gap-1 items-center bg-white py-2 px-4 shadow">
+                <img class="w-6 h-6" src="{{ request.locale.iso_code | append: '.webp' | asset_url }}" alt="{{ request.locale.iso_code | upcase }} Flag">
+                <span class="uppercase text-sm font-medium">{{ request.locale.iso_code }}</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+
+              <div class="lang-menu absolute -left-15 top-10 mt-2 bg-white border border-main-gray rounded-lg shadow w-40 hidden">
+                <ul class="py-2">
+                  {% for locale in shop.published_locales %}
+                    {% assign lang_root_pathes = shop.published_locales | map: 'root_url' %}
+                    {% if locale.primary %}
+                      {% assign url_path = locale.root_url | append: request.path %}
+                      {% for lang in lang_root_pathes %}
+                        {% capture url_path %}{{ url_path | replace: lang, '/' | replace: '//', '/' }}{% endcapture %}
+                      {% endfor %}
+                    {% else %}
+                      {% assign url_path = locale.root_url | append: request.path | replace: '//', '/' %}
+                    {% endif %}
+
+                    <li>
+                      <a href="{{ url_path }}" class="flex items-center px-4 py-2 hover:bg-gray-100 {% if locale.iso_code == request.locale.iso_code %}bg-gray-100{% endif %}">
+                        <img src="{{ locale.iso_code | append: '.webp' | asset_url }}" alt="{{ locale.iso_code | upcase }}" class="w-5 h-5 mr-2">
+                        <span class="capitalize">{{ locale.name }}</span>
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <ul class="md:mt-10 mt-5 font-neue-l flex flex-col gap-4 3xl:text-xl">
+            {% for link in linklists[section.settings.footer_left].links %}
+              <li>
+                <a
+                  class="hover:text-main-blue duration-200 transition-all hover:border-b-[1px] {% if link.url == request.path %} text-main-blue border-b-[1px] {% endif %}"
+                  href="{{ link.url }}"
+                  target="_blank"
+                >
+                  {{- link.title -}}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="md:w-1/2 w-full xl:p-[50px] lg:p-8 md:p-5 border-light-gray md:border-b-none border-b-[1px] md:pb-0 pb-5">
+          <img class="max-w-[150px] opacity-0 md:block hidden" src="{{ section.settings.footer-logo | image_url }}" alt="Logo">
+          <ul class="mt-10 font-neue-l flex flex-col gap-4 3xl:text-xl">
+            {% for link in linklists[section.settings.footer_right].links %}
+              <li>
+                <a
+                  class="hover:text-main-blue duration-200 transition-all hover:border-b-[1px] {% if link.url == request.path %} text-main-blue border-b-[1px] {% endif %}"
+                  href="{{ link.url }}"
+                  target="_blank"
+                >
+                  {{- link.title -}}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <!-- Bottom Cols -->
+      <div class="flex md:flex-row flex-col w-full lg:h-[50%] md:h-[300px]">
+        <div class="md:w-1/2 w-full md:border-r-[1px] border-light-gray xl:p-[50px] lg:p-8 md:p-5 flex items-end">
+          <ul class="mt-10 font-neue-l flex flex-col gap-4 3xl:text-xl">
+            <li>
+              <a class="hover:text-main-blue duration-200 transition-all hover:border-b-[1px]" href="{{ section.settings.policy }}" target="_blank">{{ 'sections.custom.privacy' | t }}</a>
+            </li>
+            <li>
+              © {{ 'now' | date: '%Y' }}
+              {{ 'sections.custom.rigths' | t }}
+            </li>
+          </ul>
+        </div>
+        <div class="md:w-1/2 w-full xl:p-[50px] lg:p-8 md:p-5 md:flex hidden items-end justify-end">
+          <!-- Language Selector -->
+          <div class="relative z-50 language-selector">
+            <button class="cursor-pointer hover:shadow lang-btn flex gap-1 items-center bg-white py-2 px-4">
+              <img class="w-6 h-6" src="{{ request.locale.iso_code | append: '.webp' | asset_url }}" alt="{{ request.locale.iso_code | upcase }} Flag">
+              <span class="uppercase text-sm font-medium">{{ request.locale.iso_code }}</span>
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+
+            <div class="lang-menu absolute -left-20 -top-32 mt-2 bg-white border border-main-gray rounded-lg shadow w-40 hidden">
+              <ul class="py-2">
+                {% for locale in shop.published_locales %}
+                  {% assign lang_root_pathes = shop.published_locales | map: 'root_url' %}
+                  {% if locale.primary %}
+                    {% assign url_path = locale.root_url | append: request.path %}
+                    {% for lang in lang_root_pathes %}
+                      {% capture url_path %}{{ url_path | replace: lang, '/' | replace: '//', '/' }}{% endcapture %}
+                    {% endfor %}
+                  {% else %}
+                    {% assign url_path = locale.root_url | append: request.path | replace: '//', '/' %}
+                  {% endif %}
+
+                  <li>
+                    <a href="{{ url_path }}" class="flex items-center px-4 py-2 hover:bg-gray-100 {% if locale.iso_code == request.locale.iso_code %}bg-gray-100{% endif %}">
+                      <img src="{{ locale.iso_code | append: '.webp' | asset_url }}" alt="{{ locale.iso_code | upcase }}" class="w-5 h-5 mr-2">
+                      <span class="capitalize">{{ locale.name }}</span>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Navigation Links"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_left",
+      "label": "Footer Left"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_right",
+      "label": "Footer Right"
+    },
+    {
+      "type": "header",
+      "content": "Policy Link"
+    },
+    {
+      "type": "url",
+      "id": "policy",
+      "label": "Privacy Policy"
+    },
+    {
+      "type": "header",
+      "content": "Logotype"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer-logo",
+      "label": "Choose Logo"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
+{% endschema %}

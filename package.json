@@ -1,0 +1,22 @@
+{
+  "name": "shopify-dawn-template",
+  "version": "1.0.0",
+  "description": "[![Build status](https://github.com/shopify/dawn/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Shopify/dawn/actions/workflows/ci.yml?query=branch%3Amain) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?color=informational)](/.github/CONTRIBUTING.md)",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently  -c \"auto\" \"npm:dev:*\"",
+    "dev:tailwind": "npx @tailwindcss/cli -i ./styles/main.css -o ./assets/style.css --watch --minify",
+    "dev:shopify": "shopify theme dev --store=motor-g --store-password=strapi",
+    "format": "prettier --write \"**/*.liquid\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@shopify/prettier-plugin-liquid": "^1.6.0",
+    "@tailwindcss/cli": "^4.1.3",
+    "concurrently": "^9.1.0",
+    "prettier": "^3.3.3",
+    "tailwindcss": "^4.1.3"
+  }
+}

@@ -1,0 +1,94 @@
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const getInitialVisibleCount = () => (window.innerWidth < 768 ? 5 : 8);
+    let visibleCount = getInitialVisibleCount();
+    const batchSize = visibleCount;
+
+    function revealInitialProducts() {
+      const allItems = document.querySelectorAll('.product-item');
+      allItems.forEach((item, index) => {
+        if (index < visibleCount) {
+          item.classList.remove('hidden');
+          item.classList.add('flex');
+        }
+      });
+    }
+
+    function updateShowMoreButtonVisibility() {
+      const items = document.querySelectorAll('.product-item');
+      const hiddenItems = Array.from(items).filter((item) => item.classList.contains('hidden'));
+      const showMoreBtn = document.querySelector('.show-more-products');
+
+      if (!showMoreBtn || hiddenItems.length === 0 || items.length <= visibleCount) {
+        showMoreBtn?.classList.add('hidden');
+      } else {
+        showMoreBtn?.classList.remove('hidden');
+      }
+    }
+
+    function setupShowMoreButton() {
+      const showMoreBtn = document.querySelector('.show-more-products');
+      const allItems = document.querySelectorAll('.product-item');
+
+      if (!showMoreBtn || allItems.length <= visibleCount) {
+        showMoreBtn?.classList.add('hidden');
+      }
+
+      showMoreBtn?.addEventListener('click', () => {
+        let revealed = 0;
+        allItems.forEach((item, index) => {
+          if (index >= visibleCount && revealed < batchSize) {
+            item.classList.remove('hidden');
+            item.classList.add('flex');
+            revealed++;
+          }
+        });
+        visibleCount += revealed;
+        if (visibleCount >= allItems.length) {
+          showMoreBtn.classList.add('hidden');
+        }
+      });
+    }
+
+    function attachFilterListeners() {
+      const filterForm = document.getElementById('CollectionFiltersForm');
+      const sectionId = filterForm?.dataset.sectionId;
+      if (!filterForm || !sectionId) return;
+
+      filterForm.querySelectorAll('select').forEach((select) => {
+        select.addEventListener('change', () => {
+          const formData = new FormData(filterForm);
+          let searchParams = new URLSearchParams(formData).toString();
+          searchParams = searchParams.replace(/&?page=\d+/, '');
+          const fetchUrl = `${window.location.pathname}?section_id=${sectionId}&${searchParams}`;
+
+          fetch(fetchUrl)
+            .then((res) => res.text())
+            .then((html) => {
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(html, 'text/html');
+              const newSection = doc.querySelector(`#shopify-section-${sectionId}`);
+              const currentSection = document.querySelector(`#shopify-section-${sectionId}`);
+              if (newSection && currentSection) {
+                currentSection.innerHTML = newSection.innerHTML;
+
+                visibleCount = getInitialVisibleCount();
+                revealInitialProducts();
+                setupShowMoreButton();
+                attachFilterListeners();
+                updateShowMoreButtonVisibility();
+              }
+
+              const newUrl = `${window.location.pathname}?${searchParams}`;
+              window.history.pushState({}, '', newUrl);
+            });
+        });
+      });
+    }
+
+    revealInitialProducts();
+    setupShowMoreButton();
+    attachFilterListeners();
+    updateShowMoreButtonVisibility();
+  });
+</script>

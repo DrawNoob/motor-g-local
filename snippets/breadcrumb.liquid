@@ -1,0 +1,31 @@
+<div class="breadcrumb flex gap-2 text-gray-400 py-3">
+  <a href="{{ routes.root_url }}" class="hover:underline">Home</a>
+  {% if template contains 'collection' %}
+    <p>/</p>
+    <a href="{{ routes.collections_url }}" class="hover:underline">Collections</a>
+    {% if collection %}
+      <p>/</p>
+      <a href="{{ collection.url }}" class="hover:underline">{{ collection.title }}</a>
+    {% endif %}
+  {% elsif template contains 'product' %}
+    <p>/</p>
+    <a href="{{ routes.collections_url }}" class="hover:underline">Collections</a>
+    {% if collection %}
+      <p>/</p>
+      <a href="{{ collection.url }}" class="hover:underline">{{ collection.title }}</a>
+    {% endif %}
+    <p>/</p>
+    <span class="text-black">{{ product.title | truncate: 20 }}</span>
+  {% elsif template contains 'page' %}
+    <p>/</p>
+    <span class="text-black">{{ page.title }}</span>
+  {% elsif template contains 'blog' %}
+    <p>/</p>
+    <a href="{{ blog.url }}" class="hover:underline">{{ blog.title }}</a>
+  {% elsif template contains 'article' %}
+    <p>/</p>
+    <a href="{{ blog.url }}" class="hover:underline">{{ blog.title }}</a>
+    <p>/</p>
+    <span class="text-black">{{ article.title }}</span>
+  {% endif %}
+</div>

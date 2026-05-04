@@ -1,0 +1,56 @@
+<style>
+  .swiper-2-pagination-{{ section.id }} .swiper-pagination-bullet {
+    border: 2px solid #8B97A1;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+</style>
+
+<!-- Images Slider -->
+<div class="lg:w-7/12 w-full bg-background z-10 overflow-hidden">
+  <div class="swiper-2-{{ section.id }} w-full flex items-center relative">
+    <div class="swiper-wrapper flex">
+      {% assign media_limit = 4 %}
+      {% assign media_count = 0 %}
+
+      {% for media in product.media %}
+        {% if media_count == media_limit %}
+          {% break %}
+        {% endif %}
+
+        <div class="swiper-slide w-full">
+          <div class="aspect-square w-full">
+            {% if media.media_type == 'image' %}
+              <img class="w-full h-full object-cover" src="{{ media | image_url }}" alt="{{ product.title }}">
+            {% elsif media.media_type == 'video' or media.media_type == 'external_video' %}
+              {{ media | video_tag: controls: true, autoplay: true, muted: true, loop: true, playsinline: true, class: 'w-full h-full object-cover' }}
+            {% endif %}
+          </div>
+        </div>
+
+        {% assign media_count = media_count | plus: 1 %}
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="absolute flex gap-2 bottom-5 right-5 swiper-2-pagination-{{ section.id }} mt-4"></div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const swiper2 = new Swiper('.swiper-2-{{ section.id }}', {
+      direction: 'horizontal',
+      loop: false,
+      centeredSlides: false,
+      speed: 1000,
+      slidesPerView: 1,
+      spaceBetween: 0,
+      pagination: {
+        el: '.swiper-2-pagination-{{ section.id }}',
+        clickable: true,
+      },
+    });
+  });
+</script>

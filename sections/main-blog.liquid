@@ -1,0 +1,62 @@
+<div class="w-full mx-auto max-w-[1280px] md:px-0 px-4">
+  <!-- BLOGS -->
+  <div class="gap-5 mt-5 pb-10">
+    {% for article in blogs[section.settings.selected_blog].articles limit: section.settings.article_limit %}
+      <h1 class="md:text-3xl text-2xl font-bold font-emilio text-center md:py-10 py-5">
+        {% if article.title != blank %}
+          <a href="{{ article.url }}">{{ article.title }}</a>
+        {% else %}
+          <a href="{{ article.url }}">{{ 'sections.product-information.articul' | t }}</a>
+        {% endif %}
+      </h1>
+      <div class="flex flex-col items-center gap-5">
+        <a href="{{ article.url }}">
+          {% if article.image != blank %}
+            <img class="w-full mx-auto rounded-2xl object-cover object-center" src="{{ article.image | image_url }}" alt="{{ article.title }}">
+          {% else %}
+            <img class="w-full mx-auto rounded-2xl object-cover object-center" src="{{ 'product-1.webp' | asset_url }}" alt="{{ article.title }}">
+          {% endif %}
+        </a>
+        <div class="flex md:flex-row flex-col gap-3">
+          <p class="bg-background px-5 py-2 w-max rounded-full text-xs uppercase font-neue-m">{{ article.published_at | date: '%B %d, %Y' }}</p>
+          <p class="bg-background px-5 py-2 w-max rounded-full text-xs uppercase font-neue-m">{{ article.author }}</p>
+        </div>
+
+        <p class="font-neue-l">{{ article.content }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function adjustImageHeight() {
+      if (window.innerWidth > 768) {
+        document.querySelectorAll('.blog-image').forEach((img) => {
+          img.style.height = img.clientWidth + 'px';
+        });
+      } else {
+        document.querySelectorAll('.blog-image').forEach((img) => {
+          img.style.height = 'auto';
+        });
+      }
+    }
+
+    adjustImageHeight();
+
+    window.addEventListener('resize', adjustImageHeight);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [
+    {
+      "type": "blog",
+      "id": "selected_blog",
+      "label": "Select Blog"
+    }
+  ]
+}
+{% endschema %}

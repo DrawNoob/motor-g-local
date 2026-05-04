@@ -1,0 +1,373 @@
+{% form 'product', product, id: 'product-form' %}
+  <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
+  <section class="bg-background responsive-padding md:pb-[70px] pb-[50px] overflow-x-hidden">
+    <div class="flex items-center gap-1.5 max-w-[1440px] mx-auto pt-3 pb-8">
+      <a class="text-main-gray hover:underline" href="/">{{ 'sections.product-information.home' | t }}</a>
+      <p class="text-main-gray hover:underline">></p>
+      <a class="text-main-gray hover:underline" href="/collections/all">{{ 'sections.product-information.catalog' | t }}</a>
+      <p class="text-main-gray hover:underline">></p>
+      <a class="text-main-blue" href="#">{{ product.title }}</a>
+    </div>
+    <div class="md:hidden flex flex-col gap-2 w-full pb-3">
+      <h1 class="lg:text-3xl md:text-2xl text-xl font-neue-m">{{ product.title }}</h1>
+      <p class="text-main-gray text-sm">{{ 'sections.product-information.articul' | t }}: {{ product.selected_or_first_available_variant.barcode }}</p>
+    </div>
+    <div class="flex lg:flex-row flex-col max-w-[1440px] mx-auto">
+      {% case section.settings.image_snippet %}
+        {% when 'default' %}
+          {% render 'product-hero-images' %}
+        {% when 'v2' %}
+          {% render 'product-hero-image-v-1' %}
+        {% when 'v3' %}
+          {% render 'product-hero-image-v-2' %}
+      {% endcase %}
+
+      <!-- Information -->
+      <div class="lg:w-5/12 w-full flex flex-col lg:mt-0 mt-10">
+        <div class="flex flex-col lg:pl-[30px]">
+          <!-- Title & Barcode -->
+          {% if product.title or product.selected_or_first_available_variant.barcode %}
+            <div class="md:flex hidden justify-between items-center w-full border-b-[1px] border-light-gray pb-4">
+              {% if product.title %}
+                <h1 class="lg:text-3xl md:text-2xl text-xl font-neue-m">{{ product.title }}</h1>
+              {% endif %}
+              {% if product.selected_or_first_available_variant.barcode %}
+                <p class="text-main-gray text-sm">{{ 'products.product.sku' | t }}: {{ product.selected_or_first_available_variant.barcode }}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <!-- Product Opportunities -->
+          {% if product.metafields.custom.product_opportunities %}
+            <div class="flex items-center gap-4 py-4 border-b-[1px] border-light-gray">
+              <p class="text-xl font-neue-m">{{ 'sections.product-information.kv' | t }}:</p>
+              <p class="text-sm text-main-gray font-neue-r">{{ product.metafields.custom.product_opportunities }}</p>
+            </div>
+          {% endif %}
+
+          <!-- Topology -->
+          {% if product.metafields.custom.product_topology %}
+            <div class="flex items-center gap-4 py-4 border-b-[1px] border-light-gray">
+              <p class="text-xl font-neue-m">{{ 'sections.product-information.topology' | t }}:</p>
+              <p class="text-sm text-main-gray font-neue-r">{{ product.metafields.custom.product_topology }}</p>
+            </div>
+          {% endif %}
+
+          <!-- Magnits -->
+          {% if product.metafields.custom.product_magnits %}
+            <div class="flex items-center gap-4 py-4 border-b-[1px] border-light-gray">
+              <p class="text-xl font-neue-m">{{ 'sections.product-information.magnits' | t }}:</p>
+              <p class="text-sm text-main-gray font-neue-r">{{ product.metafields.custom.product_magnits }}</p>
+            </div>
+          {% endif %}
+
+          <!-- Warmer -->
+          {% if product.metafields.custom.product_winding %}
+            <div class="flex items-center gap-4 py-4 border-b-[1px] border-light-gray">
+              <p class="text-xl font-neue-m">{{ 'sections.product-information.warmer' | t }}:</p>
+              <p class="text-sm text-main-gray font-neue-r">{{ product.metafields.custom.product_winding }}</p>
+            </div>
+          {% endif %}
+
+          <!-- Test Result -->
+          {% if product.metafields.custom.product_reports %}
+            <div class="flex xl:flex-row flex-col xl:items-center items-start gap-4 py-4 border-b-[1px] border-light-gray">
+              <p class="text-xl font-neue-m">{{ 'sections.product-information.test-result' | t }}:</p>
+              <a href="{{ product.metafields.custom.product_reports }}" target="_blank" class="flex items-center gap-2 text-sm underline font-neue-r">
+                <img class="w-[10px]" src="{{ 'dow.svg' | asset_url }}" alt="Arrow"> {{ 'sections.custom.download' | t }}
+                <br class="md:hidden">
+                {{ 'sections.custom.tech-info' | t }}
+              </a>
+            </div>
+          {% endif %}
+
+          <div class="grid grid-cols-1 md:grid-cols-2 md:gap-5 md:pt-[30px] pt-5">
+            {% if product.options_with_values.size > 0 and product.options_with_values[0].name != 'Title' %}
+              {% for option in product.options_with_values %}
+                <div class="mb-4">
+                  <div class="relative cursor-pointer h-[60px] flex items-center justify-center">
+                    <img class="absolute lg:block md:hidden block left-5 w-5 h-5" src="{{ 'flash.webp' | asset_url }}" alt="Dron">
+                    <select
+                      name="options[{{ option.name }}]"
+                      class="pl-14 variant-option appearance-none rounded-full w-full h-[60px] border-2 px-4"
+                      data-index="{{ forloop.index0 }}"
+                    >
+                      {% for value in option.values %}
+                        <option value="{{ value }}">{{ value }}</option>
+                      {% endfor %}
+                    </select>
+                    <img class="absolute z-0 right-5" src="{{ 'arr.svg' | asset_url }}" alt="Arr">
+                  </div>
+                </div>
+              {% endfor %}
+            {% endif %}
+            <!-- Discount Information -->
+            {% assign tiers = product.metafields.custom.product_discount_meta.value %}
+            {% if tiers != blank %}
+              <div class="mb-4 discount-block relative md:w-[130px] w-full">
+                <div class="discount-btn relative cursor-pointer h-[60px] md:w-[130px] w-full flex items-center justify-center gap-3 bg-light-gray rounded-full">
+                  <img class="w-5 h-5 discount" src="{{ 'discount.webp' | asset_url }}" alt="Dron">
+                  <p>{{ 'customer.order.discount' | t }}</p>
+                </div>
+                <div class="discount-menu absolute left-0 mt-2 bg-white border border-main-gray rounded-lg shadow md:w-72 w-full z-30 opacity-0 scale-95 pointer-events-none transition-all duration-400 ease-out hidden">
+                  <ul class="py-3 px-5 flex flex-col">
+                    <li class="pb-2.5">{{ 'sections.custom.quantity-info' | t }}:</li>
+                    {% for tier in tiers %}
+                      <li class="py-2.5 border-t-[1px] border-light-gray">
+                        {{ tier.from.value -}}
+                        {%- if tier.to.value != blank %}&nbsp;–&nbsp;{{ tier.to.value }}{% else %}+{% endif %}
+                        {{ 'sections.custom.units' | t }}
+
+                        {%- if tier.enable_fixed_discount.value == true %}
+                          <span class="text-main-blue"
+                            >( -{{ tier.fixed_product_discount_amount.value | round }}
+                            {{ cart.currency.symbol }})</span
+                          >
+                        {%- else %}
+                          <span class="text-main-blue">({{ tier.discount.value }}%)</span>
+                        {%- endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+          <div class="flex md:flex-row flex-col items-start justify-between w-full md:py-7 py-4">
+            <div class="flex items-center gap-3">
+              <p class="font-neue-r relative top-0.5">{{ 'sections.custom.quantity' | t }}:</p>
+              <div class="flex gap-1 items-center">
+                <p class="quantity-decrease text-3xl cursor-pointer hover:scale-105 disabled:pointer-events-none select-none">−</p>
+                <input
+                  type="number"
+                  id="quantity-input"
+                  name="quantity"
+                  min="1"
+                  value="1"
+                  class="w-14 text-center text-xl border border-none"
+                >
+                <p class="quantity-increase text-3xl cursor-pointer hover:scale-105 select-none">+</p>
+              </div>
+            </div>
+            <div class="flex flex-col md:items-end md:gap-1 gap-2">
+              <div class="flex md:flex-row flex-row-reverse justify-end items-center gap-2">
+                <p class="text-white bg-main-blue px-2 py-1 text-xs" id="discount-percent" style="display: none;"></p>
+                <p class="md:text-3xl text-2xl font-neue-m" id="product-price">{{ product.price | money }}</p>
+              </div>
+              <p class="text-base text-main-gray font-neue-m line-through" id="product-price-original">{{ product.compare_at_price | money }}</p>
+            </div>
+          </div>
+
+          {% render 'add-to-cart-btn' %}
+
+          <p class="text-main-gray py-4 text-center w-full">{{ 'sections.custom.mail-post' | t }}.</p>
+        </div>
+
+        <!-- Product Swiper start -->
+        {% render 'product-hero-swiper' %}
+        <!-- Product Swiper end -->
+      </div>
+    </div>
+  </section>
+{% endform %}
+
+<!-- LD + JSON Schema -->
+<script type="application/ld+json">
+  {{ product | structured_data }}
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const quantityInput = document.getElementById('quantity-input');
+    const minusBtn = document.querySelector('.quantity-decrease');
+    const plusBtn = document.querySelector('.quantity-increase');
+    const priceEl = document.getElementById('product-price');
+    const priceOriginalEl = document.getElementById('product-price-original');
+    const variantIdInput = document.getElementById('variant-id');
+    const optionSelectors = document.querySelectorAll('.variant-option');
+
+    const variants = {{ product.variants | json }};
+    const activeCurrency = Shopify.currency.active || "{{ cart.currency.iso_code }}";
+
+    const MAX_VALUE_PRODUCT_QUANTITY = 99999999;
+    let discountOptionsRaw = {{ product.metafields.custom.product_discount_meta.value | json }};
+    let discountOptions = Array.isArray(discountOptionsRaw) ? discountOptionsRaw : [];
+
+    discountOptions = discountOptions.map((elem) => {
+      if (!elem.to) {
+        elem.to = MAX_VALUE_PRODUCT_QUANTITY;
+      }
+      return elem;
+    });
+
+    const getMatchedDiscount = (productQuantity) => {
+      return discountOptions.find((elem) => (elem.from <= productQuantity) && (elem.to > productQuantity));
+    };
+
+    const updateMinusBtnState = () => {
+      const quantity = parseInt(quantityInput.value);
+      if (quantity <= 1) {
+        minusBtn.classList.add('opacity-50');
+      } else {
+        minusBtn.classList.remove('opacity-50');
+      }
+    };
+
+    quantityInput.addEventListener('input', () => {
+      const val = parseInt(quantityInput.value);
+      if (isNaN(val) || val < 1) {
+        quantityInput.value = 1;
+      } else if (val > 99999) {
+        quantityInput.value = 99999;
+      }
+      updatePrice();
+      updateMinusBtnState();
+    });
+
+    minusBtn.addEventListener('click', () => {
+      let current = parseInt(quantityInput.value);
+      if (current > 1) {
+        quantityInput.value = current - 1;
+        updatePrice();
+        updateMinusBtnState();
+      }
+    });
+
+    plusBtn.addEventListener('click', () => {
+      let current = parseInt(quantityInput.value) || 1;
+      if (current < 99999) {
+        quantityInput.value = current + 1;
+        updatePrice();
+        updateMinusBtnState();
+      }
+    });
+    
+
+    optionSelectors.forEach(selector => {
+      selector.addEventListener('change', () => {
+        updateVariantId();
+        updatePrice();
+      });
+    });
+
+    function updateVariantId() {
+      const selectedOptions = Array.from(optionSelectors).map(s => s.value);
+      const matchedVariant = variants.find(v => {
+        return JSON.stringify(v.options) === JSON.stringify(selectedOptions);
+      });
+
+      if (matchedVariant) {
+        variantIdInput.value = matchedVariant.id;
+      }
+    }
+
+    function updatePrice() {
+  const quantity = parseInt(quantityInput.value);
+  let matchedVariant;
+
+  if (optionSelectors.length === 0) {
+    matchedVariant = variants[0];
+  } else {
+    const selectedOptions = Array.from(optionSelectors).map(s => s.value);
+    matchedVariant = variants.find(v => {
+      return JSON.stringify(v.options) === JSON.stringify(selectedOptions);
+    });
+  }
+
+  if (matchedVariant) {
+    const matchedDiscount = getMatchedDiscount(quantity);
+    let totalPrice = matchedVariant.price * quantity;
+    const discountPercentEl = document.getElementById('discount-percent');
+    discountPercentEl.style.display = 'none';
+
+    if (matchedDiscount && matchedDiscount.enable_fixed_discount) {
+      const fixedAmount = parseFloat(matchedDiscount.fixed_product_discount_amount) * 100; // переводимо в копійки
+      const totalFixedDiscount = fixedAmount * quantity;
+      
+      totalPrice -= totalFixedDiscount;
+      
+
+      discountPercentEl.textContent =
+        `−${(totalFixedDiscount / 100).toLocaleString(undefined, { maximumFractionDigits: 0 })} {{ cart.currency.symbol }}`;
+      discountPercentEl.style.display = 'inline-block';
+    }
+
+    priceEl.textContent = formatMoney(totalPrice);
+
+    if (matchedVariant.compare_at_price) {
+      const comparePrice = matchedVariant.compare_at_price * quantity;
+      priceOriginalEl.textContent = formatMoney(comparePrice);
+      priceOriginalEl.style.display = 'inline-block';
+    } else {
+      priceOriginalEl.textContent = '';
+      priceOriginalEl.style.display = 'none';
+    }
+  }
+}
+
+
+    const formatMoney = (cents) => {
+      return (cents / 100).toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }) + ' {{ cart.currency.symbol }}';
+    };
+
+    updateVariantId();
+    updatePrice();
+    updateMinusBtnState();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Products Slider",
+  "settings": [
+    {
+      "type": "select",
+      "id": "image_snippet",
+      "label": "Виберіть тип зображень для слайдера",
+      "options": [
+        {
+          "label": "Стандарт",
+          "value": "default"
+        },
+        {
+          "label": "Версія 2 (2x2)",
+          "value": "v2"
+        },
+        {
+          "label": "Версія 3 (Слайдер)",
+          "value": "v3"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "checkbox",
+      "id": "buy-now",
+      "label": "Buy Now Button",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_slide",
+      "name": "Продукт",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Оберіть товар"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Products Slider"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,82 @@
+<section class="bg-background">
+  <div class="max-w-[1440px] mx-auto relative flex flex-col justify-center md:items-center xl:pt-[175px] lg:pt-[120px] pt-[90px] xl:pb-[100px] lg:pb-[80px] pb-[50px] md:px-0 px-4">
+    <!-- Головний заголовок -->
+    <h2 class="md:absolute lg:top-[100px] md:top-10 lg:left-[60px] md:left-10 xl:text-[55px] lg:text-[40px] text-3xl font-neue-m leading-[100%]">
+      {{ section.settings.title | newline_to_br }}
+    </h2>
+
+    <!-- Зображення -->
+    <img class="md:block hidden xl:w-[800px] lg:w-[700px] md:w-[500px]" src="{{ 'circle-image.webp' | asset_url }}" alt="Dron in Circle" width="800px" height="800px">
+    <img class="md:hidden w-full" src="{{ 'circle-image-mob.webp' | asset_url }}" alt="Dron in Circle">
+
+    <!-- Форма -->
+    <div class="flex flex-col md:absolute lg:right-[60px] xl:bottom-[140px] lg:bottom-[100px] md:bottom-10 md:right-10 bg-main-blue md:w-[45%] md:px-10 px-4 py-10">
+      <p class="text-3xl text-white leading-[90%]">
+        {{ section.settings.form_title | newline_to_br }}
+      </p>
+      <button class="support-modal-btn cursor-pointer text-white border-b-4 py-4 mt-3 text-xl placeholder:text-white focus:pl-5 bg-no-repeat bg-right flex justify-between items-center">
+        {{ section.settings.button_label }}
+        <img src="{{ 'white-arr.svg' | asset_url }}" alt="">
+      </button>
+    </div>
+
+    <!-- Нижній текст -->
+    <h2 class="md:absolute xl:bottom-[110px] lg:bottom-[80px] md:bottom-10 lg:left-[110px] md:left-10 text-xl leading-6 font-neue-b uppercase md:pt-0 pt-[27px]">
+      {{ section.settings.footer_text | newline_to_br }}
+    </h2>
+  </div>
+  <!-- Modal -->
+  {% render 'contact-popup-modal' %}
+</section>
+
+{% schema %}
+{
+  "name": "Callback",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Головний заголовок",
+      "default": "Форма\nзворотнього\nзв'язку"
+    },
+    {
+      "type": "textarea",
+      "id": "form_title",
+      "label": "Текст над полем вводу",
+      "default": "Залишились\nпитання?"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Текст кнопки",
+      "default": "Написати нам"
+    },
+    {
+      "type": "textarea",
+      "id": "footer_text",
+      "label": "Нижній текст зліва",
+      "default": "Після отримання\nвашої заявки,\nзвяжимось з вами\n<span class='text-main-blue'>протягом 48 годин</span>"
+    },
+    {
+      "type": "header",
+      "content": "Form Data"
+    },
+    {
+      "type": "text",
+      "id": "modal_title",
+      "label": "Заголовок модального вікна",
+      "default": "Задайте питання"
+    },
+    {
+      "type": "url",
+      "id": "highlevel_embed_url",
+      "label": "Highlevel Embed URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Callback"
+    }
+  ]
+}
+{% endschema %}

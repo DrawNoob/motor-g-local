@@ -1,0 +1,32 @@
+<div class="relative z-30 language-selector text-black over">
+  <button class="rounded-[40px] md:rounded-none cursor-pointer hover:shadow lang-btn flex gap-1 items-center bg-white py-2 px-4">
+    <img class="w-6 h-6" src="{{ request.locale.iso_code | append: '.webp' | asset_url }}" alt="{{ request.locale.iso_code | upcase }} Flag">
+    <span class="uppercase text-sm font-medium">{{ request.locale.iso_code }}</span>
+    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </button>
+
+  <div class="lang-menu absolute md:-left-10 mt-2 bg-white border border-main-gray rounded-lg shadow w-40 hidden">
+    <ul class="py-2">
+      {% for locale in shop.published_locales %}
+        {% assign lang_root_pathes = shop.published_locales | map: 'root_url' %}
+        {% if locale.primary %}
+          {% assign url_path = locale.root_url | append: request.path %}
+          {% for lang in lang_root_pathes %}
+            {% capture url_path %}{{ url_path | replace: lang, '/' | replace: '//', '/' }}{% endcapture %}
+          {% endfor %}
+        {% else %}
+          {% assign url_path = locale.root_url | append: request.path | replace: '//', '/' %}
+        {% endif %}
+
+        <li>
+          <a href="{{ url_path }}" class="flex items-center px-4 py-2 hover:bg-gray-100 {% if locale.iso_code == request.locale.iso_code %}bg-gray-100{% endif %}">
+            <img src="{{ locale.iso_code | append: '.webp' | asset_url }}" alt="{{ locale.iso_code | upcase }}" class="w-5 h-5 mr-2">
+            <span class="capitalize">{{ locale.name }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

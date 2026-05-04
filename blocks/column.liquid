@@ -1,0 +1,88 @@
+<div
+  style="
+    {% if block.settings.bg_col %}
+      background-color: {{ block.settings.bg_color }};
+    {% else %}
+      background-color: transparent;
+    {% endif %}
+  "
+  class="
+    flex flex-col flex-grow w-full max-w-7xl mx-auto
+    {% if block.settings.padding %}px-4 sm:px-6 lg:px-8 py-8{% endif %}
+    justify-{{ block.settings.vertical_align }}
+    items-{{ block.settings.horizontal_align }}
+    {% if block.settings.rounded %}rounded-2xl{% endif %}
+  "
+  {{ block.shopify_attributes }}
+>
+  {% content_for 'blocks' %}
+</div>
+{% schema %}
+{
+  "name": "Column",
+  "tag": null,
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Position"
+    },
+    {
+      "type": "select",
+      "id": "vertical_align",
+      "label": "Vertical Align",
+      "options": [
+        { "value": "start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "end", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_align",
+      "label": "Horizontal Align",
+      "options": [
+        { "value": "auto", "label": "Auto" },
+        { "value": "start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "end", "label": "Right" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "checkbox",
+      "id": "padding",
+      "label": "Padding",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Cisual Customize"
+    },
+    {
+      "type": "checkbox",
+      "id": "bg_col",
+      "label": "Background Coler?",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "label": "Rounded corners",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Column"
+    }
+  ]
+}
+{% endschema %}

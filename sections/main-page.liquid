@@ -1,0 +1,162 @@
+<section class="bg-background xl:pt-[150px] md:pt-[100px] pt-[30px] md:pb-0 pb-[50px] responsive-padding overflow-hidden">
+  <div class="z-0 relative flex flex-col items-center font-neue-m gap-14 max-w-[1440px] mx-auto md:min-h-[350px]">
+    <h1 class="text-main-blue 2xl:border-8 xl:border-4 border-2 xl:py-4 xl:px-10 py-2 px-5 2xl:text-5xl xl:text-4xl lg:text-3xl md:text-2xl md:block hidden">
+      {{ section.settings.mobile_heading }}
+      <span class="typing-text">FPV_</span>
+    </h1>
+    <h2 class="2xl:text-5xl xl:text-4xl lg:text-3xl text-xl">{{ 'general.password_page.made_in' | t }}</h2>
+    <!-- Wheel Motor -->
+    <img
+      class="lg:block -mb-[330px] hidden md:w-[45.5%] spinning"
+      src="
+        {% if section.settings.motor != blank %}
+          {{ section.settings.motor | image_url }}
+        {% else %}
+          {{ 'motor.webp' | asset_url }}
+        {% endif %}
+      "
+      alt="Motor"
+      loading="eager"
+      fetchpriority="high"
+      width="850"
+      height="850"
+    >
+    <img
+      class="lg:hidden md:w-3/12 sm:w-1/2 w-[90%] spinning"
+      src="
+        {% if section.settings.motor != blank %}
+          {{ section.settings.motor | image_url }}
+        {% else %}
+          {{ 'motor.webp' | asset_url }}
+        {% endif %}
+      "
+      alt="Motor"
+      loading="eager"
+      fetchpriority="high"
+      width="450"
+      height="450"
+    >
+    <div class="md:hidden flex flex-col items-start w-full">
+      <h2 class="uppercase text-main-blue text-[42px] leading-[90%] font-neue-m">{{ section.settings.mobile_heading }}</h2>
+      <h3 class="uppercase text-main-blue text-3xl mt-4 py-1 px-2 border-4 w-full typing-text min-h-[52px]"></h3>
+    </div>
+    <div class="flex w-full md:flex-row flex-col-reverse justify-between md:absolute bottom-7 md:items-end items-start">
+      <a
+        class="group flex items-center justify-between xl:w-[300px] lg:w-[250px] md:w-[200px] w-full text-main-blue lg:border-b-4 border-b-2 xl:py-5 py-4 px-0 hover:px-4 hover:bg-main-blue hover:text-white duration-200 transition-all"
+        href="{{ section.settings.motor_link | default: '/collections/all' }}"
+      >
+        <p class="text-xl">{{ 'products.product.our_products' | t }}</p>
+        <img class="w-5 h-5 group-hover:hidden block" src="{{ 'arrow-right.svg' | asset_url }}" alt="Dron">
+        <img class="w-5 h-5 hidden group-hover:block" src="{{ 'arrow-right-white.svg' | asset_url }}" alt="Dron">
+      </a>
+      <div class="flex flex-col gap-5">
+        <img class="w-5 h-5" src="{{ 'dron.webp' | asset_url }}" alt="Dron">
+        <p class="uppercase font-bold text-base">
+          {{ section.settings.bottom_paragraph | newline_to_br }}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Auto type --------------------------------------------------------------------------------------------------------------------
+  const words = ['{{ section.settings.word_1 | escape }}', '{{ section.settings.word_2 | escape }}', '{{ section.settings.word_3 | escape }}', '{{ section.settings.word_4 | escape }}'];
+  const typingSpans = document.querySelectorAll('.typing-text');
+
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  function typeEffect() {
+    const currentWord = words[wordIndex];
+    const visibleText = currentWord.substring(0, charIndex);
+
+    typingSpans.forEach((span) => {
+      span.textContent = visibleText;
+    });
+
+    if (!isDeleting && charIndex < currentWord.length) {
+      charIndex++;
+      setTimeout(typeEffect, 100);
+    } else if (isDeleting && charIndex > 0) {
+      charIndex--;
+      setTimeout(typeEffect, 50);
+    } else {
+      if (!isDeleting) {
+        isDeleting = true;
+        setTimeout(typeEffect, 1000); // pause before deleting
+      } else {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        setTimeout(typeEffect, 300); // pause before typing next word
+      }
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', typeEffect);
+  // ------------------------------------------------------------------------------------------------------------------------------
+</script>
+
+{% schema %}
+{
+  "name": "Main Page",
+  "blocks": [{ "type": "@theme" }],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "motor",
+      "label": "Motor Image"
+    },
+    {
+      "type": "url",
+      "id": "motor_link",
+      "label": "Motor Link"
+    },
+    {
+      "type": "header",
+      "content": "Autotype Words"
+    },
+    {
+      "type": "text",
+      "id": "word_1",
+      "label": "Word 1",
+      "default": "FPV_"
+    },
+    {
+      "type": "text",
+      "id": "word_2",
+      "label": "Word 2",
+      "default": "Мультикоптер_"
+    },
+    {
+      "type": "text",
+      "id": "word_3",
+      "label": "Word 3",
+      "default": "Важких_"
+    },
+    {
+      "type": "text",
+      "id": "word_4",
+      "label": "Word 4",
+      "default": "Літакового типу_"
+    },
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "mobile_heading",
+      "label": "Mobile Heading",
+      "default": "Якісні мотори для дронів"
+    },
+    {
+      "type": "textarea",
+      "id": "bottom_paragraph",
+      "label": "Bottom Paragraph",
+      "default": "Наші електромотори для <br> мілітарного використання <br> є Battle approved"
+    }
+  ]
+}
+{% endschema %}

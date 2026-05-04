@@ -1,0 +1,41 @@
+<!-- Welcome Section -->
+<section class="responsive-padding bg-background pt-[100px] md:pb-[100px] pb-10">
+  <div class="max-w-[1440px] mx-auto">
+    <p class="text-main-gray font-neue-r pb-3">{{ section.settings.subtitle }}</p>
+    <div class="flex justify-between w-full md:flex-row flex-col md:gap-0 gap-[100px]">
+      <h1 class="md:w-8/12 responsive-text font-neue-m leading-[120%]">{{ section.settings.main_text }}</h1>
+      <p class="md:w-3/12 text-main-blue uppercase text-end font-neue-b leading-6 md:mt-6">{{ section.settings.side_text }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Welcome Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Підзаголовок",
+      "default": "Про компанію"
+    },
+    {
+      "type": "textarea",
+      "id": "main_text",
+      "label": "Основний текст",
+      "default": "Заснована під час війни, наша компанія створює електромотори для БПЛА, ставлячи акцент на якість та інновації."
+    },
+    {
+      "type": "textarea",
+      "id": "side_text",
+      "label": "Текст збоку",
+      "default": "Власний відділ R&D дає змогу розробляти нові моделі та оптимізувати існуючі мотори."
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Us Welcome Section"
+    }
+  ]
+}
+{% endschema %}

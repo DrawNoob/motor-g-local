@@ -1,0 +1,158 @@
+<div class="relative image-block w-full {% if block.settings.full_width %}max-w-none{% else %}max-w-{{ block.settings.max_width }}{% endif %}">
+  <img
+    src="{{ block.settings.image | image_url }}"
+    alt="{{ block.settings.image.alt | escape }}"
+    loading="lazy"
+    class="
+      w-full h-auto object-{{ block.settings.image_fit }}
+      {% if block.settings.rounded %}rounded-2xl{% endif %}
+      {% if block.settings.flip == 'horizontal' %}transform scale-x-[-1]{% endif %}
+    "
+    {% if block.settings.max_height != blank %}
+      style="
+        max-width: {{ block.settings.max_width }}%;
+        max-height: {{ block.settings.max_height }}px;
+      "
+    {% endif %}
+  >
+  <div
+    style="
+      {% if block.settings.top-bottom %} bottom: {{ block.settings.bot }}px; {%  else %} top: {{ block.settings.top }}px; {% endif %}
+      {% if block.settings.left-right %} right: {{ block.settings.right }}px; {%  else %} left: {{ block.settings.left }}px; {% endif %}
+    "
+    class="absolute"
+  >
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image",
+  "blocks": [{ "type": "text" }],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "Max width",
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "max_height",
+      "min": 25,
+      "max": 1000,
+      "step": 25,
+      "label": "Max height",
+      "unit": "px",
+      "default": 1000
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "options": [
+        { "value": "contain", "label": "Contain" },
+        { "value": "cover", "label": "Cover" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "label": "Rounded corners",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "flip",
+      "label": "Image Reverse",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "horizontal", "label": "Reverse" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "Text Position"
+    },
+    {
+      "type": "checkbox",
+      "id": "top-bottom",
+      "label": "Top / Bottom",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "Top",
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "bot",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "Bottom",
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "left-right",
+      "label": "Left / Right",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "Left",
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "Right",
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image"
+    }
+  ]
+}
+{% endschema %}

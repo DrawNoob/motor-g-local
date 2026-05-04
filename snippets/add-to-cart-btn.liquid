@@ -1,0 +1,49 @@
+{% if product.available %}
+  <button type="submit" class="w-full flex items-center justify-center bg-main-blue rounded-xl text-white h-[50px] cursor-pointer hover:bg-black duration-150">
+    {{ 'sections.custom.add-to-cart' | t }}
+  </button>
+  <a
+    href="#"
+    id="buy-now-btn"
+    class="w-full mt-5 {% if section.settings.buy-now %} flex {% else %} hidden {% endif %} items-center justify-center bg-main-blue rounded-xl text-white h-[50px] cursor-pointer hover:bg-black duration-150"
+  >
+    {{ 'products.product.buy_now' | t }}
+  </a>
+{% else %}
+  <button type="button" class="w-full flex items-center justify-center bg-gray-300 rounded-xl text-gray-500 h-[50px] cursor-not-allowed" disabled>
+    {{ 'sections.custom.sold-out' | t }}
+  </button>
+{% endif %}
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', () => {
+    const buyNowBtn = document.getElementById('buy-now-btn');
+    const variantInput = document.getElementById('variant-id');
+    const quantityInput = document.getElementById('quantity-input');
+
+    buyNowBtn.addEventListener('click', async function (e) {
+      e.preventDefault();
+
+      const variantId = variantInput.value;
+      const quantity = quantityInput.value;
+
+      try {
+        await fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: variantId,
+            quantity: quantity,
+          }),
+        });
+
+        window.location.href = '/checkout';
+      } catch (error) {
+        console.error('Buy Now Error:', error);
+        alert('Error. Try one more time later.');
+      }
+    });
+  });
+{% endjavascript %}

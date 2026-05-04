@@ -1,0 +1,101 @@
+<style>
+  .paddings{
+    padding-right: {{ block.settings.m-r }}px;
+    padding-left: {{ block.settings.m-l }}px;
+  }
+  @media (max-width: 768px) {
+    .paddings{
+      padding-right: {{ block.settings.m-r-mob }}px;
+      padding-left: {{ block.settings.m-l-mob }}px;
+    }
+  }
+</style>
+
+<a href="{{ block.settings.url }}">
+  <img
+    style="height: {{ block.settings.height  }}px;"
+    class="w-auto paddings"
+    src="{{ block.settings.logo | image_url }}"
+    alt="Logotype"
+  >
+</a>
+
+{% schema %}
+{
+  "name": "Linked Logotype",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logotype"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Image Link"
+    },
+    {
+      "type": "header",
+      "content": "Logo Size"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Height",
+      "min": 5,
+      "max": 100,
+      "step": 5,
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Paddings"
+    },
+    {
+      "type": "range",
+      "id": "m-r",
+      "label": "Padding Right",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "m-l",
+      "label": "Padding Left",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Mobile Paddings"
+    },
+    {
+      "type": "range",
+      "id": "m-r-mob",
+      "label": "Padding Right",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "m-l-mob",
+      "label": "Padding Left",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Linked Logotype"
+    }
+  ]
+}
+{% endschema %}

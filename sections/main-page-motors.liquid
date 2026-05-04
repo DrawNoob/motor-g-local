@@ -1,0 +1,68 @@
+<!-- Our Motors Section -->
+<section class="z-10 responsive-padding xl:pt-[80px] md:pt-[65px] pt-[50px] lg:pb-[70px] pb-[50px]">
+  <div class="max-w-[1440px] mx-auto flex flex-col">
+    <div class="flex sm:flex-row flex-col items-start justify-between w-full sm:gap-0 gap-5">
+      <h2 class="xl:text-[55px] lg:text-[40px] md:text-3xl text-2xl font-neue-m">
+        {{ section.settings.heading | newline_to_br }}
+      </h2>
+      <h4 class="text-base text-main-blue md:text-end sm:text-center text-start font-neue-b leading-[130%] uppercase">
+        {{ section.settings.heading | newline_to_br }}
+      </h4>
+    </div>
+    <div class="flex md:flex-row flex-col justify-around xl:pt-[80px] md:pt-[45px] pt-[30px] md:gap-0 gap-5">
+      <!-- Item -->
+      <div class="flex flex-col items-center gap-5 md:w-auto w-full md:bg-transparent bg-background md:py-0 py-[14px]">
+        <img class="lg:w-[180px] md:w-[130px] w-[104px] spinning" src="{{ 'our-icon-1.svg' | asset_url }}" alt="Icon" width="180" height="180">
+        <p class="text-base font-neue-b uppercase">{{ section.settings.left_motor }}</p>
+      </div>
+      <!-- Item -->
+      <div class="flex flex-col items-center gap-5 md:w-auto w-full md:bg-transparent bg-background md:py-0 py-[14px]">
+        <img class="lg:w-[180px] md:w-[130px] w-[104px] spinning" src="{{ 'our-icon-2.svg' | asset_url }}" alt="Icon" width="180" height="180">
+        <p class="text-base font-neue-b uppercase">{{ section.settings.middle_motor }}</p>
+      </div>
+      <!-- Item -->
+      <div class="flex flex-col items-center gap-5 md:w-auto w-full md:bg-transparent bg-background md:py-0 py-[14px]">
+        <img class="lg:w-[180px] md:w-[130px] w-[104px] spinning" src="{{ 'our-icon-3.svg' | asset_url }}" alt="Icon" width="180" height="180">
+        <p class="text-base font-neue-b uppercase">{{ section.settings.right_motor }}</p>
+      </div>
+    </div>
+    <div class="w-full flex md:justify-center justify-start reveal-zoom">
+      <p class="md:w-[400px] uppercase font-neue-b w-full md:text-center text-start text-main-blue leading-[120%] md:pt-[65px] pt-[30px]">
+        {{ section.settings.heading | newline_to_br }}
+      </p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Our Motors Section",
+  "blocks": [{ "type": "@theme" }],
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Основний заголовок",
+      "default": "Наші електромотори для <br> мілітарного використання є <br> Battle approved"
+    },
+    {
+      "type": "text",
+      "id": "left_motor",
+      "label": "Назва першого типу моторів",
+      "default": "FVP"
+    },
+    {
+      "type": "text",
+      "id": "middle_motor",
+      "label": "Назва другого типу моторів",
+      "default": "Важкі дрони"
+    },
+    {
+      "type": "text",
+      "id": "right_motor",
+      "label": "Назва третього типу моторів",
+      "default": "Літакового типу"
+    }
+  ]
+}
+{% endschema %}

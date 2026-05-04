@@ -1,0 +1,147 @@
+<style>
+  .marquee {
+    display: flex;
+    white-space: nowrap;
+    position: relative;
+  }
+</style>
+
+<div
+  style="
+    padding-top: {{ section.settings.py }}px;
+    padding-bottom: {{ section.settings.py }}px;
+    margin: {{ section.settings.my }}px auto;
+  "
+  class="overflow-hidden bg-background relative"
+>
+  <div style="gap: {{ section.settings.gap }}px;" class="marquee flex items-center" id="marquee">
+    {% for block in section.blocks %}
+      <div class="flex items-center space-x-2">
+        <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.text }}" class="h-10 w-auto">
+        <span class="text-gray-700">{{ block.settings.text }}</span>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const marquee = document.getElementById('marquee');
+    const speed = 1;
+
+    function duplicateContent(times = 5) {
+      let clone = marquee.innerHTML;
+      for (let i = 0; i < times; i++) {
+        marquee.innerHTML += clone;
+      }
+    }
+
+    function startMarquee() {
+      let scrollAmount = 0;
+      function move() {
+        scrollAmount -= speed;
+        if (Math.abs(scrollAmount) >= marquee.scrollWidth / 6) {
+          scrollAmount = 0;
+        }
+        marquee.style.transform = `translateX(${scrollAmount}px)`;
+        requestAnimationFrame(move);
+      }
+      move();
+    }
+
+    duplicateContent(5);
+    startMarquee();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Running Line",
+  "settings": [
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap",
+      "min": 5,
+      "max": 200,
+      "step": 5,
+      "default": 100,
+      "info": "Space between elements"
+    },
+    {
+      "type": "range",
+      "id": "py",
+      "label": "Padding Y",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "default": 10,
+      "info": "Inside space to top & bottom"
+    },
+    {
+      "type": "range",
+      "id": "my",
+      "label": "Margin Y",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "default": 10,
+      "info": "Outside space to top & bottom"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Marquee Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "100% Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Running Line",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "image": "",
+            "text": "100% Product"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "image": "",
+            "text": "100% Product"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "image": "",
+            "text": "100% Product"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "image": "",
+            "text": "100% Product"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

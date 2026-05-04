@@ -1,0 +1,256 @@
+<!doctype html>
+<html class="js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- endunless -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {%- unless settings.type_body_font.system? -%}
+      {% comment %}theme-check-disable AssetPreload{% endcomment %}
+      <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
+      {% comment %}theme-check-enable AssetPreload{% endcomment %}
+    {%- endunless -%}
+
+    {%- unless settings.type_header_font.system? -%}
+      {% comment %}theme-check-disable AssetPreload{% endcomment %}
+      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
+      {% comment %}theme-check-enable AssetPreload{% endcomment %}
+    {%- endunless -%}
+
+    {% comment %} SCRIPTS {% endcomment %}
+    <script src="{{ 'script.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'scroll-reveal-base.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'scroll-reveal.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'swiper.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'cart-custom.js' | asset_url }}" defer="defer"></script>
+
+    {{ content_for_header }}
+
+    {% style %}
+      @font-face {
+        font-family: 'NeueThin';
+        src: url('{{ "HelveticaNeue-Thin.woff2" | asset_url }}') format('woff2');
+        font-weight: thin;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: 'NeueLight';
+        src: url('{{ "HelveticaNeue-Light.woff2" | asset_url }}') format('woff2');
+        font-weight: light;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: 'NeueBold';
+        src: url('{{ "HelveticaNeue-Bold.woff2" | asset_url }}') format('woff2');
+        font-weight: bold;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: 'NeueRoman';
+        src: url('{{ "HelveticaNeue-Roman.woff2" | asset_url }}') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: 'NeueMedium';
+        src: url('{{ "HelveticaNeue-Medium.woff2" | asset_url }}') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+      }
+    {% endstyle %}
+
+    {% comment %} Connecting compiled tailwindcss {% endcomment %}
+    {{ 'style.css' | asset_url | stylesheet_tag }}
+
+    {% comment %} EXAMPLE: connect our  {% endcomment %}
+    {% comment %}
+      {{ 'style.css.map' | asset_url | stylesheet_tag }}
+      {{ 'swiper-min.css' | asset_url | stylesheet_tag }}
+    {% endcomment %}
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "motor-G",
+        "url": "https://{{ shop.domain }}",
+        "description": "{{ shop.description }}",
+        "logo": "https://cdn.shopify.com/s/files/1/0931/7217/0825/files/header-logo.png?v=1744652220",
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+38-063-941-31-10",
+            "contactType": "customer support",
+            "areaServed": "UA",
+            "availableLanguage": ["Ukrainian", "English"],
+            "email": "info@motor-g.com"
+          }
+        ],
+        "sameAs": ["https://www.instagram.com/motor.g.ua/?hl=en", "https://www.youtube.com/@Motor-G_electricmotors", "https://signal.me/#p/+380639413110", "https://wa.me/380639413110"]
+      }
+    </script>
+
+    <!-- website schema for main-page -->
+    {% if template == 'index' %}
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "url": "https://{{ shop.domain }}",
+          "name": "{{ shop.name }}",
+          "description": "{{ shop.description | strip_newlines | escape }}",
+          "potentialAction": {
+            "@type": "Action",
+            "name": "Contact US",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://{{ shop.domain }}/pages/contact"
+            }
+          }
+        }
+      </script>
+    {% endif %}
+
+    <!-- breadcrumb schema for product -->
+    {% if template contains 'product' %}
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "{{ shop.url }}"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "{{ collection.title | escape }}",
+              "item": "{{ shop.url }}/collections/{{ collection.handle }}"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "{{ product.title | escape }}",
+              "item": "{{ shop.url }}{{ product.url }}"
+            }
+          ]
+        }
+      </script>
+    {% endif %}
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-TLRHDZ26');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-TLRHDZ26"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  </head>
+
+  <body class="relative">
+    {% if template != 'password' %}
+      {% section 'header' %}
+    {% endif %}
+
+    <main role="main">
+      {{ content_for_layout }}
+    </main>
+
+    {% if template != 'password' %}
+      {% section 'footer' %}
+    {% endif %}
+
+    <script>
+      window.shopUrl = '{{ request.origin }}';
+      window.routes = {
+        cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}',
+        cart_url: '{{ routes.cart_url }}',
+        predictive_search_url: '{{ routes.predictive_search_url }}',
+      };
+
+      window.cartStrings = {
+        error: `{{ 'sections.cart.cart_error' | t }}`,
+        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
+      };
+
+      window.variantStrings = {
+        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+        soldOut: `{{ 'products.product.sold_out' | t }}`,
+        unavailable: `{{ 'products.product.unavailable' | t }}`,
+        unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
+      };
+
+      window.quickOrderListStrings = {
+        itemsAdded: `{{ 'sections.quick_order_list.items_added.other' | t: quantity: '[quantity]' }}`,
+        itemAdded: `{{ 'sections.quick_order_list.items_added.one' | t: quantity: '[quantity]' }}`,
+        itemsRemoved: `{{ 'sections.quick_order_list.items_removed.other' | t: quantity: '[quantity]' }}`,
+        itemRemoved: `{{ 'sections.quick_order_list.items_removed.one' | t: quantity: '[quantity]' }}`,
+        viewCart: `{{- 'sections.quick_order_list.view_cart' | t -}}`,
+        each: `{{- 'sections.quick_order_list.each' | t: money: '[money]' }}`,
+        min_error: `{{- 'sections.quick_order_list.min_error' | t: min: '[min]' }}`,
+        max_error: `{{- 'sections.quick_order_list.max_error' | t: max: '[max]' }}`,
+        step_error: `{{- 'sections.quick_order_list.step_error' | t: step: '[step]' }}`,
+      };
+
+      window.accessibilityStrings = {
+        imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
+        shareSuccess: `{{ 'general.share.success_message' | t }}`,
+        pauseSlideshow: `{{ 'sections.slideshow.pause_slideshow' | t }}`,
+        playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`,
+        recipientFormExpanded: `{{ 'recipient.form.expanded' | t }}`,
+        recipientFormCollapsed: `{{ 'recipient.form.collapsed' | t }}`,
+        countrySelectorSearchCount: `{{ 'localization.country_results_count' | t: count: '[count]' }}`,
+      };
+    </script>
+
+    {% comment %}
+      {%- if settings.predictive_search_enabled -%}
+        <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+      {%- endif -%}
+
+      {%- if settings.cart_type == 'drawer' -%}
+        <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+      {%- endif -%}
+    {% endcomment %}
+  </body>
+</html>

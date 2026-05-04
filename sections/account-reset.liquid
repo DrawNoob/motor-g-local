@@ -1,0 +1,59 @@
+<div class="flex justify-center items-center w-full md:py-28 py-16">
+  <div class="flex flex-col bg-background rounded-2xl w-full md:max-w-[600px] max-w-[92%] md:px-10 px-5 md:py-16 py-6">
+    <h1 class="md:text-center text-left font-emilio md:text-4xl text-2xl">{{ section.settings.heading }}</h1>
+    <p class="text-center mt-4">{{ section.settings.description }}</p>
+    <form class="md:mt-10 mt-4" action="POST">
+      <input
+        class="w-full border-b-[1px] border-gray-500 py-4 focus:pl-4"
+        type="text"
+        placeholder="{{ section.settings.email_placeholder }}"
+      >
+      <button class="mt-7 bg-button rounded-xl w-full py-6">{{ section.settings.submit_text }}</button>
+    </form>
+    <div class="flex justify-center gap-7 items-center mt-12">
+      <a class="underline" href="#">{{ section.settings.cancel_text }}</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Reset Password Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Reset your password"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "We will send you an email to reset your password"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email Placeholder",
+      "default": "Your Email"
+    },
+    {
+      "type": "text",
+      "id": "submit_text",
+      "label": "Submit Button Text",
+      "default": "Submit"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "cancel_text",
+      "label": "Cancel Link Text",
+      "default": "Cancel"
+    }
+  ]
+}
+{% endschema %}

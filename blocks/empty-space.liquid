@@ -1,0 +1,26 @@
+<div
+  class="w-full"
+  style="padding: {{ block.settings.padding_y }}px;"
+></div>
+
+{% schema %}
+{
+  "name": "Empty Space",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "label": "Height",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 10
+    }
+  ],
+  "presets": [{ "name": "Empty Space" }]
+}
+{% endschema %}

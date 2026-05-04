@@ -1,0 +1,137 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "theme.custom",
+  "sections": {
+    "about-us-section": {
+      "type": "about-us-section",
+      "settings": {
+        "subtitle": "Про компанію",
+        "main_text": "Заснована під час війни, наша компанія створює електромотори для БПЛА, ставлячи акцент на якість та інновації.",
+        "side_text": "Власний відділ R&D дає змогу розробляти нові моделі та оптимізувати існуючі мотори."
+      }
+    },
+    "about-us-white": {
+      "type": "about-us-white",
+      "settings": {
+        "main_text": "Наші українські електромотори <span class=\"text-main-blue\">створюються з особливим акцентом на якість</span>, щоб забезпечити високу надійність і стабільність роботи БпЛА.",
+        "sub_text": "Відпрацьовані виробничі процеси дозволяють підтримувати високий рівень якості."
+      }
+    },
+    "about-us-text-images": {
+      "type": "about-us-text-images",
+      "settings": {
+        "heading": "Виробництво здійснюється в Україні...",
+        "caption": "Моторно працюємо задля перемоги.",
+        "video": "shopify://files/videos/video.webm"
+      }
+    },
+    "about-us-smi": {
+      "type": "about-us-smi",
+      "blocks": {
+        "media_post_tNe8RJ": {
+          "type": "media_post",
+          "settings": {
+            "image": "shopify://shop_images/Bedfhhzsdsdv-imeni-1024x682.jpg",
+            "name": "Олександр Ян",
+            "date": "19 Грудня, 2024",
+            "title": "Ніякого Китаю: українські виробники близькі до самостійного виробництва FPV-дронів",
+            "text": "До кінця 2024 року Сили оборони отримають близько двох мільйонів FPV-дронів, що зробить їх вплив та роль на полі бою співставною з класичною артилерією. Проте їх постачання може опинитись під загрозою, оскільки Китай почав обмежувати закордонні продажі складових безпілотників, що може підірвати обороноздатність нашої країни.",
+            "link": "https://mil.in.ua/uk/articles/niyakogo-kytayu-ukrayinski-vyrobnyky-blyzki-do-samostijnogo-vyrobnytstva-fpv-droniv/"
+          }
+        },
+        "media_post_kaE7EY": {
+          "type": "media_post",
+          "settings": {
+            "image": "shopify://shop_images/464585453_10162066668928151_1524704469214407604_n-1024x764.jpg",
+            "name": "Олександр Ян",
+            "date": "19 Грудня, 2024",
+            "title": "В Україні склали перший повністю український FPV-дрон",
+            "text": "Компанія Vyriy drone склала перший зразок FPV-коптера із комплектуючих, що були виготовлені в Україні.\n\nПро це «Мілітарному» розповів засновник компанії Олексій Бабенко.\n\nПриватна українська компанія, що спеціалізується на виробництві ударних дронів та серійно постачає їх Силам оборони, цього місяця представила зразок повністю локалізованого 10-дюймового FPV-коптера.",
+            "link": "https://mil.in.ua/uk/news/v-ukrayini-sklaly-pershyj-povnistyu-ukrayinskyj-fpv-dron/"
+          }
+        },
+        "media_post_Kffe9a": {
+          "type": "media_post",
+          "settings": {
+            "image": "shopify://shop_images/0d343c5b-72ab68cf87871ea92ac89eafccc89d62.jpg",
+            "name": "Олександр Ян",
+            "date": " 01 березня, 2025",
+            "title": "Український Lean. Дронарі Vyriy виробляють до 20 000 FPV‐дронів на місяць.",
+            "text": "Олексій Бабенко побудував одну з найбільших і найпродуктивніших компаній з виготовлення FPV-дронів. Допомогли технологія ефективного виробництва Toyota, відкритість та енергія самого засновника. Як влаштовано це виробництво та яким бачить його майбутнє засновник?",
+            "link": "https://forbes.ua/innovations/nisha-iz-supervelikimi-pributkami-11022025-27044"
+          }
+        }
+      },
+      "block_order": [
+        "media_post_tNe8RJ",
+        "media_post_kaE7EY",
+        "media_post_Kffe9a"
+      ],
+      "settings": {
+        "title": "ЗМІ про нас:"
+      }
+    },
+    "about-us-videos": {
+      "type": "about-us-videos",
+      "blocks": {
+        "video_block_9KdVAQ": {
+          "type": "video_block",
+          "settings": {
+            "video_url": "https://www.youtube.com/embed/qbd3b98cpR4"
+          }
+        },
+        "video_block_JrUyhw": {
+          "type": "video_block",
+          "settings": {
+            "video_url": "https://www.youtube.com/embed/DDfGntjotGc"
+          }
+        },
+        "video_block_37aNKd": {
+          "type": "video_block",
+          "settings": {
+            "video_url": "https://www.youtube.com/embed/zp4DsfBnv4Y"
+          }
+        }
+      },
+      "block_order": [
+        "video_block_9KdVAQ",
+        "video_block_JrUyhw",
+        "video_block_37aNKd"
+      ],
+      "settings": {
+        "title": "Відео про нас:"
+      }
+    },
+    "contact": {
+      "type": "contact",
+      "settings": {
+        "heading": "Наші контакти:",
+        "map_url": "https://maps.google.com/maps?width=561&height=500&hl=en&q=Київ&t=&z=8&ie=UTF8&iwloc=B&output=embed",
+        "email": "info@motor-g.com",
+        "phone": "+38 (063) 941-31-10",
+        "viber_title": "Viber",
+        "viber_link": "tel:+38 (063) 941-31-10",
+        "signal_title": "Signal",
+        "signal_link": "https://signal.me/#p/+380639413110",
+        "whatsapp_title": "WhatsApp",
+        "whatsapp_link": "https://wa.me/380639413110"
+      }
+    }
+  },
+  "order": [
+    "about-us-section",
+    "about-us-white",
+    "about-us-text-images",
+    "about-us-smi",
+    "about-us-videos",
+    "contact"
+  ]
+}

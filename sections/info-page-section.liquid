@@ -1,0 +1,46 @@
+<!-- Welcome Section -->
+<section class="flex flex-col md:items-center items-start bg-background md:pb-[100px] pb-[60px] responsive-padding">
+  <div class="md:py-10 py-7">
+    <img class="reveal-zoom md:w-[320px] w-full md:h-[218px]" src="{{ 'info.webp' | asset_url }}" alt="Info Motor">
+  </div>
+  <p class="reveal-left font-neue-r text-main-gray pb-5">
+    {{ section.settings.subtitle }}
+  </p>
+  <h1 class="reveal-right md:text-center font-neue-m responsive-text pb-5 leading-[100%]">
+    {{ section.settings.heading }}
+  </h1>
+  <p class="reveal-left md:text-center font-neue-r text-xl">
+    {{ section.settings.description }}
+  </p>
+</section>
+
+{% schema %}
+{
+  "name": "Welcome Info Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Інформативна сторінка"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Локалізоване виробництво <br> моторів в....."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "розказуємо, що можемо локалізувати виробництво моторів в вашій країні, щоб відповідати <br> нормам по локалізації продукту"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Welcome Info"
+    }
+  ]
+}
+{% endschema %}
