@@ -1,59 +1,57 @@
 <!-- Our Motors Section -->
 <section class="z-10 responsive-padding bg-white xl:pt-[80px] md:pt-[65px] pt-[50px] lg:pb-[70px] pb-[50px]">
   <div class="max-w-[1440px] mx-auto flex flex-col">
-    <div class="grid grid-cols-1 gap-7 p-3 md:p-6 lg:grid-cols-6 lg:items-end lg:gap-12">
-      <div class="flex w-full flex-col lg:col-span-3">
-        <div class="grid w-full grid-cols-3 gap-4 lg:w-max">
-          <div class="aspect-square overflow-hidden lg:h-[220px] lg:w-[220px]">
-            <img class="h-full w-full object-cover" src="{{ 'new-mt-1.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
-          </div>
-          <div class="aspect-square overflow-hidden lg:h-[220px] lg:w-[220px]">
-            <img class="h-full w-full object-cover" src="{{ 'new-mt-2.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
-          </div>
-          <div class="aspect-square overflow-hidden lg:h-[220px] lg:w-[220px]">
-            <img class="h-full w-full object-cover" src="{{ 'new-mt-3.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
-          </div>
-          <div class="aspect-square overflow-hidden lg:h-[220px] lg:w-[220px]">
-            <img class="h-full w-full object-cover" src="{{ 'new-mt-4.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
-          </div>
-          <div class="aspect-square overflow-hidden lg:h-[220px] lg:w-[220px]">
-            <img class="h-full w-full object-cover" src="{{ 'new-mt-5.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
-          </div>
-          <div class="aspect-square overflow-hidden lg:h-[220px] lg:w-[220px]">
-            <img class="h-full w-full object-cover" src="{{ 'new-mt-6.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
-          </div>
-        </div>
-        <div class="mt-3 border-t border-[#8d8d8d] pt-2 text-center text-[20px] leading-[1.2] text-[#151515]">
-          {{ section.settings.fpv_title }}
-        </div>
+    <div class="hidden lg:block">
+      <div class="grid grid-cols-6 gap-4">
+        <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-1.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}"></div>
+        <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-2.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}"></div>
+        <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-3.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}"></div>
+        <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-7.png' | asset_url }}" alt="{{ section.settings.fixed_wing_title | escape }}"></div>
+        <div></div>
+        <div></div>
+
+        <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-4.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}"></div>
+        <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-5.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}"></div>
+        <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-6.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}"></div>
+        <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-8.png' | asset_url }}" alt="{{ section.settings.fixed_wing_title | escape }}"></div>
+        <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-9.png' | asset_url }}" alt="{{ section.settings.fixed_wing_title | escape }}"></div>
+        <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-10.png' | asset_url }}" alt="{{ section.settings.vandal_title | escape }}"></div>
       </div>
 
-      <div class="flex w-full flex-col lg:col-span-2">
-        <div class="grid w-full grid-cols-3 gap-4 lg:w-max lg:grid-cols-2">
-          <div class="aspect-square overflow-hidden lg:col-start-1 lg:row-start-1 lg:h-[220px] lg:w-[220px]">
-            <img class="h-full w-full object-cover" src="{{ 'new-mt-7.png' | asset_url }}" alt="{{ section.settings.fixed_wing_title | escape }}">
-          </div>
-          <div class="aspect-square overflow-hidden lg:col-start-1 lg:row-start-2 lg:h-[220px] lg:w-[220px]">
-            <img class="h-full w-full object-cover" src="{{ 'new-mt-8.png' | asset_url }}" alt="{{ section.settings.fixed_wing_title | escape }}">
-          </div>
-          <div class="aspect-square overflow-hidden lg:col-start-2 lg:row-start-2 lg:h-[220px] lg:w-[220px]">
-            <img class="h-full w-full object-cover" src="{{ 'new-mt-9.png' | asset_url }}" alt="{{ section.settings.fixed_wing_title | escape }}">
-          </div>
+      <div class="mt-3 grid grid-cols-6 gap-4">
+        <div class="col-span-3 border-t border-[#8d8d8d] pt-2 text-center text-[20px] leading-[1.2] text-[#151515]">{{ section.settings.fpv_title }}</div>
+        <div class="col-span-2 border-t border-[#8d8d8d] pt-2 text-center text-[20px] leading-[1.2] text-[#151515]">{{ section.settings.fixed_wing_title }}</div>
+        <div class="col-span-1 border-t border-[#8d8d8d] pt-2 text-center text-[20px] leading-[1.2] text-[#151515]">{{ section.settings.vandal_title }}</div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-7 p-3 md:p-6 lg:hidden">
+      <div class="flex w-full flex-col">
+        <div class="grid w-full grid-cols-3 gap-4">
+          <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-1.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}"></div>
+          <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-2.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}"></div>
+          <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-3.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}"></div>
+          <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-4.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}"></div>
+          <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-5.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}"></div>
+          <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-6.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}"></div>
         </div>
-        <div class="mt-3 border-t border-[#8d8d8d] pt-2 text-center text-[20px] leading-[1.2] text-[#151515]">
-          {{ section.settings.fixed_wing_title }}
-        </div>
+        <div class="mt-3 border-t border-[#8d8d8d] pt-2 text-center text-[20px] leading-[1.2] text-[#151515]">{{ section.settings.fpv_title }}</div>
       </div>
 
-      <div class="mx-auto flex w-full flex-col lg:col-span-1 lg:mx-0">
-        <div class="grid w-full grid-cols-3 gap-4 lg:w-max lg:grid-cols-1 lg:pt-[calc(100%+1rem)]">
-          <div class="col-start-2 aspect-square overflow-hidden lg:col-start-1 lg:h-[220px] lg:w-[220px]">
-            <img class="h-full w-full object-cover" src="{{ 'new-mt-10.png' | asset_url }}" alt="{{ section.settings.vandal_title | escape }}">
-          </div>
+      <div class="flex w-full flex-col">
+        <div class="grid w-full grid-cols-3 gap-4">
+          <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-7.png' | asset_url }}" alt="{{ section.settings.fixed_wing_title | escape }}"></div>
+          <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-8.png' | asset_url }}" alt="{{ section.settings.fixed_wing_title | escape }}"></div>
+          <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-9.png' | asset_url }}" alt="{{ section.settings.fixed_wing_title | escape }}"></div>
         </div>
-        <div class="mt-3 border-t border-[#8d8d8d] pt-2 text-center text-[20px] leading-[1.2] text-[#151515]">
-          {{ section.settings.vandal_title }}
+        <div class="mt-3 border-t border-[#8d8d8d] pt-2 text-center text-[20px] leading-[1.2] text-[#151515]">{{ section.settings.fixed_wing_title }}</div>
+      </div>
+
+      <div class="mx-auto flex w-full flex-col">
+        <div class="grid w-full grid-cols-3 gap-4">
+          <div class="col-start-2 aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-10.png' | asset_url }}" alt="{{ section.settings.vandal_title | escape }}"></div>
         </div>
+        <div class="mt-3 border-t border-[#8d8d8d] pt-2 text-center text-[20px] leading-[1.2] text-[#151515]">{{ section.settings.vandal_title }}</div>
       </div>
     </div>
   </div>
