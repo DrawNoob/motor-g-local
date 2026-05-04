@@ -1,179 +1,65 @@
 <!-- Our Motors Section -->
-<section class="z-10 responsive-padding xl:pt-[80px] md:pt-[65px] pt-[50px] lg:pb-[70px] pb-[50px]">
+<section class="z-10 responsive-padding bg-white xl:pt-[80px] md:pt-[65px] pt-[50px] lg:pb-[70px] pb-[50px]">
   <div class="max-w-[1440px] mx-auto flex flex-col">
-    <p class="motors-all-models">{{ section.settings.all_models_text }}</p>
+    <p class="mb-4 text-sm md:text-base leading-[1.2] text-[#7b7b7b]">{{ section.settings.all_models_text }}</p>
 
-    <div class="motors-wrap">
-      <div class="motor-group motor-group--fpv">
-        <div class="motor-grid motor-grid--6">
-          <!-- Item -->
-          <div class="motor-card">
-            <img src="{{ 'new-mt-1.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
+    <div class="grid grid-cols-1 gap-7 bg-[#ececec] p-3 md:p-6 lg:grid-cols-6 lg:items-start lg:gap-4">
+      <div class="flex w-full flex-col lg:col-span-3">
+        <div class="grid w-full grid-cols-3 gap-2">
+          <div class="aspect-square overflow-hidden rounded-[10px] bg-[#dcdcdc]">
+            <img class="h-full w-full object-cover" src="{{ 'new-mt-1.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
           </div>
-          <!-- Item -->
-          <div class="motor-card">
-            <img src="{{ 'new-mt-2.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
+          <div class="aspect-square overflow-hidden rounded-[10px] bg-[#dcdcdc]">
+            <img class="h-full w-full object-cover" src="{{ 'new-mt-2.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
           </div>
-          <!-- Item -->
-          <div class="motor-card">
-            <img src="{{ 'new-mt-3.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
+          <div class="aspect-square overflow-hidden rounded-[10px] bg-[#dcdcdc]">
+            <img class="h-full w-full object-cover" src="{{ 'new-mt-3.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
           </div>
-          <!-- Item -->
-          <div class="motor-card">
-            <img src="{{ 'new-mt-4.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
+          <div class="aspect-square overflow-hidden rounded-[10px] bg-[#dcdcdc]">
+            <img class="h-full w-full object-cover" src="{{ 'new-mt-4.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
           </div>
-          <!-- Item -->
-          <div class="motor-card">
-            <img src="{{ 'new-mt-5.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
+          <div class="aspect-square overflow-hidden rounded-[10px] bg-[#dcdcdc]">
+            <img class="h-full w-full object-cover" src="{{ 'new-mt-5.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
           </div>
-          <!-- Item -->
-          <div class="motor-card">
-            <img src="{{ 'new-mt-6.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
+          <div class="aspect-square overflow-hidden rounded-[10px] bg-[#dcdcdc]">
+            <img class="h-full w-full object-cover" src="{{ 'new-mt-6.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}">
           </div>
         </div>
-        <div class="motor-group-label">{{ section.settings.fpv_title }}</div>
+        <div class="mt-3 border-t border-[#8d8d8d] pt-2 text-center text-[22px] leading-[1.2] text-[#151515] md:pt-3 md:text-[28px]">
+          {{ section.settings.fpv_title }}
+        </div>
       </div>
 
-      <div class="motor-group motor-group--fixed">
-        <div class="motor-grid motor-grid--3">
-          <!-- Item -->
-          <div class="motor-card">
-            <img src="{{ 'new-mt-7.png' | asset_url }}" alt="{{ section.settings.fixed_wing_title | escape }}">
+      <div class="flex w-full flex-col lg:col-span-2">
+        <div class="grid w-full grid-cols-3 gap-2">
+          <div class="aspect-square overflow-hidden rounded-[10px] bg-[#dcdcdc]">
+            <img class="h-full w-full object-cover" src="{{ 'new-mt-7.png' | asset_url }}" alt="{{ section.settings.fixed_wing_title | escape }}">
           </div>
-          <!-- Item -->
-          <div class="motor-card">
-            <img src="{{ 'new-mt-8.png' | asset_url }}" alt="{{ section.settings.fixed_wing_title | escape }}">
+          <div class="aspect-square overflow-hidden rounded-[10px] bg-[#dcdcdc]">
+            <img class="h-full w-full object-cover" src="{{ 'new-mt-8.png' | asset_url }}" alt="{{ section.settings.fixed_wing_title | escape }}">
           </div>
-          <!-- Item -->
-          <div class="motor-card">
-            <img src="{{ 'new-mt-9.png' | asset_url }}" alt="{{ section.settings.fixed_wing_title | escape }}">
+          <div class="aspect-square overflow-hidden rounded-[10px] bg-[#dcdcdc]">
+            <img class="h-full w-full object-cover" src="{{ 'new-mt-9.png' | asset_url }}" alt="{{ section.settings.fixed_wing_title | escape }}">
           </div>
         </div>
-        <div class="motor-group-label">{{ section.settings.fixed_wing_title }}</div>
+        <div class="mt-3 border-t border-[#8d8d8d] pt-2 text-center text-[22px] leading-[1.2] text-[#151515] md:pt-3 md:text-[28px]">
+          {{ section.settings.fixed_wing_title }}
+        </div>
       </div>
 
-      <div class="motor-group motor-group--vandal">
-        <div class="motor-grid motor-grid--1">
-          <!-- Item -->
-          <div class="motor-card">
-            <img src="{{ 'new-mt-10.png' | asset_url }}" alt="{{ section.settings.vandal_title | escape }}">
+      <div class="mx-auto flex w-full max-w-[248px] flex-col lg:col-span-1 lg:mx-0 lg:max-w-none">
+        <div class="grid w-full grid-cols-1 gap-2">
+          <div class="aspect-square overflow-hidden rounded-[10px] bg-[#dcdcdc]">
+            <img class="h-full w-full object-cover" src="{{ 'new-mt-10.png' | asset_url }}" alt="{{ section.settings.vandal_title | escape }}">
           </div>
         </div>
-        <div class="motor-group-label">{{ section.settings.vandal_title }}</div>
+        <div class="mt-3 border-t border-[#8d8d8d] pt-2 text-center text-[22px] leading-[1.2] text-[#151515] md:pt-3 md:text-[36px] lg:text-[28px]">
+          {{ section.settings.vandal_title }}
+        </div>
       </div>
     </div>
   </div>
 </section>
-
-<style>
-  .motors-all-models {
-    margin: 0 0 16px;
-    color: #7b7b7b;
-    font-size: 16px;
-    line-height: 1.2;
-  }
-
-  .motors-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 24px 16px 20px;
-    background: #ececec;
-  }
-
-  .motor-group {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .motor-grid {
-    display: grid;
-    gap: 8px;
-  }
-
-  .motor-grid--6 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    width: 560px;
-  }
-
-  .motor-grid--3 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: 272px;
-  }
-
-  .motor-grid--1 {
-    grid-template-columns: 1fr;
-    width: 128px;
-  }
-
-  .motor-card {
-    aspect-ratio: 1 / 1;
-    border-radius: 10px;
-    overflow: hidden;
-    background: #dcdcdc;
-  }
-
-  .motor-card img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .motor-group-label {
-    position: relative;
-    margin-top: 16px;
-    padding-top: 14px;
-    text-align: center;
-    color: #151515;
-    font-size: 28px;
-    line-height: 1.2;
-  }
-
-  .motor-group-label::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    border-top: 1px solid #7b7b7b;
-  }
-
-  @media (max-width: 1024px) {
-    .motors-all-models {
-      font-size: 14px;
-      margin-bottom: 12px;
-    }
-
-    .motors-wrap {
-      gap: 26px;
-      padding: 20px 12px;
-    }
-
-    .motor-group {
-      width: 100%;
-    }
-
-    .motor-grid--6,
-    .motor-grid--3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      width: 100%;
-    }
-
-    .motor-grid--1 {
-      width: 33.3333%;
-      min-width: 112px;
-      margin: 0 auto;
-    }
-
-    .motor-group-label {
-      font-size: 26px;
-      margin-top: 12px;
-      padding-top: 12px;
-    }
-  }
-</style>
 
 {% schema %}
 {
@@ -206,8 +92,7 @@
   ],
   "presets": [
     {
-      "name": "Our Motors Section",
-      "category": "Main Page"
+      "name": "Our Motors Section"
     }
   ]
 }
