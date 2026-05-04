@@ -13,7 +13,27 @@
     "main": {
       "type": "main-404",
       "settings": {}
-    }
+    },
+    "main-page-motors": {
+      "type": "main-page-motors",
+      "settings": {
+        "heading": "Наші електромотори для <br> мілітарного використання є <br> Battle approved",
+        "left_motor": "FVP",
+        "middle_motor": "Важкі дрони",
+        "right_motor": "Літакового типу"
+      }
+    },
+    "main-page-effectivity": {
+      "type": "main-page-effectivity",
+      "settings": {
+        "header_logo": "shopify://shop_images/header-logo.png",
+        "main_heading": "Еффективність у <br> кожній деталі",
+        "feature_text_1": "Електромагнітні характеристики оптимізовані власним R&D відділом для досягнення найбільшої ефективності при польоті (грам/Ватт)",
+        "feature_text_2": "Кожен мотор проходить ряд електричних тестів перед відвантаженням, що значно зменшує ризик браку",
+        "feature_text_3": "Всі мотори балансуються з точністю до 0,005 г на спеціалізованому обладнанні",
+        "feature_text_4": "Всі елементи підібрані із розрахунку на мілітарне використання в безпілотних системах"
+      }
+    },
   },
   "order": [
     "main"
