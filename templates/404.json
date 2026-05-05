@@ -33,22 +33,11 @@
       "settings": {
         "title": "Каталог моторів:"
       }
-    },
-    "main_page_for_origin_wEHxAR": {
-      "type": "main-page-our-motors",
-      "name": "Our Motors Section",
-      "settings": {
-        "all_models_text": "All models",
-        "fpv_title": "FPV",
-        "fixed_wing_title": "Fixed-Wing",
-        "vandal_title": "Vandal (Interceptors)"
-      }
     }
   },
   "order": [
     "main",
     "tech_support_wnKbMe",
-    "collection_VbzEVe",
-    "main_page_for_origin_wEHxAR"
+    "collection_VbzEVe"
   ]
 }
