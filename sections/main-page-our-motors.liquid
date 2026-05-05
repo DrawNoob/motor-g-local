@@ -1,6 +1,7 @@
 <!-- Our Motors Section -->
 <section class="z-10 responsive-padding bg-white xl:pt-[120px] md:pt-[85px] pt-[70px] lg:pb-[100px] pb-[50px]">
   <div class="max-w-[1440px] mx-auto flex flex-col">
+    <h2 class="responsive-text max-w-[1440px] mx-auto font-neue-m">{{ section.settings.our_motors_title }}</h2>
     <div class="hidden lg:block">
       <div class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_1rem_minmax(0,1fr)_minmax(0,1fr)_1rem_minmax(0,1fr)] gap-4">
         <div class="aspect-square overflow-hidden"><img class="h-full w-full object-cover" src="{{ 'new-mt-1.png' | asset_url }}" alt="{{ section.settings.fpv_title | escape }}"></div>
@@ -81,6 +82,12 @@
 {
   "name": "NEW - Our Motors Section",
   "settings": [
+    {
+      "type": "text",
+      "id": "our_motors_title",
+      "label": "Our Motors title",
+      "default": "Наші мотори"
+    },
     {
       "type": "text",
       "id": "fpv_title",
